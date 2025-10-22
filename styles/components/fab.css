@@ -1,0 +1,41 @@
+/* /styles/components/fab.css (ATUALIZADO) */
+
+.fab {
+    position: fixed;
+    /* Alinhado em baixo e à direita, acima da barra de navegação */
+    bottom: 80px; 
+    right: 16px;
+    z-index: 50;
+
+    /* Dimensões padrão do M3 */
+    width: 56px;
+    height: 56px;
+
+    /* Utiliza os nossos tokens de design */
+    background-color: var(--brand-primary);
+    color: var(--brand-primary-text);
+    /* *** ATUALIZAÇÃO APLICADA: Botão completamente circular *** */
+    border-radius: 50%;
+    box-shadow: var(--shadow-high); /* Sombra de alta elevação para "flutuar" */
+
+    /* Alinhamento do ícone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+/* Efeito de "levantar" ao passar o rato */
+.fab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -4px rgba(var(--shadow-color), 0.2);
+}
+
+/* Estilo para o ícone dentro do FAB */
+.fab > i {
+    font-size: 24px;
+    line-height: 1;
+}

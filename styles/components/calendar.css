@@ -1,0 +1,109 @@
+/* /styles/components/_calendar.css - Estilos para o componente de calendário */
+
+.calendar-container {
+    padding: 16px;
+    border-top: 1px solid var(--border-decorative);
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.calendar-nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 20px;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-nav-btn:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.calendar-month-title {
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.calendar-day {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+    border: 2px solid transparent;
+    transition: var(--transition-fast);
+}
+
+.calendar-day.disabled {
+    color: var(--text-placeholder);
+    opacity: 0.5;
+}
+
+.calendar-day.has-event {
+    background-color: var(--brand-primary);
+    color: var(--brand-primary-text);
+    font-weight: 600;
+    cursor: pointer;
+}
+.calendar-day.has-event:hover {
+    filter: brightness(1.1);
+}
+
+
+.calendar-day.selected {
+    background-color: var(--brand-accent);
+    color: var(--brand-primary);
+    font-weight: 700;
+    border-color: var(--brand-primary);
+}
+
+.calendar-legend {
+    font-size: 12px;
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 8px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.calendar-legend::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--brand-primary);
+}

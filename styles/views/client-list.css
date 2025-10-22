@@ -1,0 +1,120 @@
+/* /styles/views/client-list.css (REFATORADO PARA O NOVO RANKING) */
+
+/* ======================================================================== */
+/* === Card de Cliente/Fornecedor (Base) === */
+/* ======================================================================== */
+/* Usado em AtendimentoView, InventarioView */
+
+.supplier-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+.supplier-card:hover {
+    background-color: var(--bg-tertiary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+.supplier-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+.supplier-card-name {
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.supplier-card-contact {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+.card-arrow-icon {
+    color: var(--text-placeholder);
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+
+/* ======================================================================== */
+/* === Variação: Card de Cliente Detalhado (ClientesView) === */
+/* ======================================================================== */
+
+.client-card-detailed {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Colunas: Ranking/Avatar, Info, Métricas */
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.client-card-detailed:hover {
+    background-color: var(--bg-tertiary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.client-card-avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.client-card-rank {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    width: 20px; /* Alinha os números */
+    text-align: center;
+}
+
+.client-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.client-card-name {
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* NOVO: Chip de Dívida */
+.debt-chip {
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: var(--corner-radius-full);
+    background-color: var(--feedback-error);
+    color: var(--feedback-error-text);
+    width: fit-content;
+}
+
+.client-card-metric {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.metric-value {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--feedback-success);
+    display: block;
+}
+
+.metric-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}

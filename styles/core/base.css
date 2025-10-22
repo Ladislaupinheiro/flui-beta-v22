@@ -1,0 +1,58 @@
+/* /styles/core/base.css (ATUALIZADO) */
+
+/* ======================================================================== */
+/* === Reset Básico e Padrões === */
+/* ======================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove o brilho azul no toque em mobile */
+}
+
+/* ======================================================================== */
+/* === Estilos Globais do Body === */
+/* ======================================================================== */
+
+body {
+    /* Utiliza os nossos tokens para cores de fundo e texto */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+
+    /* Define uma stack de fontes padrão e segura para o sistema */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    
+    /* Melhora a legibilidade do texto */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ======================================================================== */
+/* === Classes de Ajuda Globais === */
+/* ======================================================================== */
+
+/* Para esconder um elemento visualmente e de tecnologias assistivas */
+.hidden {
+    display: none !important;
+}
+
+/* NOVO: Para esconder um input de ficheiro, mantendo-o funcional */
+.hidden-input {
+    display: none;
+}
+
+
+/* Para esconder um elemento visualmente, mas mantê-lo acessível para leitores de ecrã */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

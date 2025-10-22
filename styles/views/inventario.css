@@ -1,0 +1,164 @@
+/* /styles/views/inventario.css (ATUALIZADO PARA NOVO LAYOUT E FILTROS) */
+
+/* ======================================================================== */
+/* === Header Específico do Inventário (com Tabs Principais) === */
+/* ======================================================================== */
+/* Estilos principais agora em page-layouts.css */
+/* Ajuste fino da altura do header para cálculo do sticky top */
+.page-header.inventory-header {
+    height: 68px; /* Altura ajustada para o segmented control + padding */
+    /* Outros estilos em page-layouts.css */
+}
+
+
+/* ======================================================================== */
+/* === Barra de Filtros Fixa (Aba Produtos) === */
+/* ======================================================================== */
+
+.sticky-filters {
+    position: sticky;
+    /* Colado abaixo do header principal (68px) */
+    top: 68px;
+    background-color: var(--bg-primary); /* Fundo para cobrir conteúdo ao rolar */
+    z-index: 9; /* Abaixo do header principal (10), mas acima do conteúdo */
+    padding-top: 8px; /* Espaço acima da barra de pesquisa */
+    border-bottom: 1px solid var(--border-decorative);
+    /* Garante que ocupe toda a largura */
+    margin-left: -16px; /* Compensa padding do .page-content */
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 116px; /* Altura fixa: padding-top(8) + search-bar(48+8) + primary-filter(40+8) = 112px -> arredondado para 116px */
+}
+
+.search-actions-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px; /* Espaço entre pesquisa e filtros primários */
+    height: 56px; /* 48px input + 8px padding */
+}
+
+.search-input-container {
+    position: relative;
+    flex-grow: 1;
+}
+
+.search-input { /* Reutiliza estilo de form.css, mas com ajustes */
+    width: 100%;
+    padding: 12px 14px 12px 40px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--corner-radius-md);
+    margin-bottom: 0;
+    height: 48px;
+    font-size: 16px;
+    border: 1px solid var(--border-interactive);
+}
+.search-input:focus {
+     outline: none;
+     border-color: var(--brand-primary);
+     box-shadow: 0 0 0 2px var(--brand-accent);
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-placeholder);
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.primary-filter-bar {
+    padding-bottom: 8px; /* Espaço abaixo dos filtros primários */
+    display: flex;
+    height: 48px; /* Altura dos filtros primários + padding */
+}
+
+.segmented-control.category-tabs {
+    flex-grow: 1;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--corner-radius-full);
+    padding: 4px;
+    display: flex;
+    height: 40px; /* Altura interna do segmented control */
+}
+.category-tabs .segmented-control-button {
+     flex: 1;
+     padding: 6px 14px;
+     font-size: 14px;
+     border-radius: var(--corner-radius-full);
+}
+
+/* Ajusta o padding do conteúdo principal quando os filtros estão fixos */
+/* Altura header (68px) + Altura filtros (116px) = 184px */
+.page-content-no-padding.with-sticky-filters {
+    padding-top: 184px;
+}
+
+
+/* ======================================================================== */
+/* === Estrutura de Paginação Vertical (Aba Produtos) === */
+/* ======================================================================== */
+
+.category-carousel-title {
+    padding: 24px 16px 8px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Seleciona APENAS os swiper-container que são carrosséis de produto */
+#inventario-produtos-grid swiper-container.product-carousel {
+    width: 100%; /* Ocupa a largura total do container pai */
+    padding: 0 16px; /* Adiciona padding lateral DENTRO do grid */
+    overflow: hidden;
+    /* padding-bottom: 24px; */ /* Espaço para paginação agora controlado pelo Swiper */
+    --swiper-pagination-color: var(--brand-primary);
+    --swiper-pagination-bullet-inactive-color: var(--border-decorative);
+    --swiper-pagination-bullet-inactive-opacity: 0.8;
+    --swiper-pagination-bottom: 8px; /* Posição da paginação */
+    --swiper-pagination-bullet-size: 6px; /* Tamanho menor para os bullets */
+}
+
+
+#inventario-produtos-grid swiper-slide {
+    width: 100%; /* Garante que o slide ocupe a largura do container */
+}
+
+.product-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 32px; /* Espaço extra abaixo dos cards para a paginação não sobrepor */
+}
+
+
+/* ======================================================================== */
+/* === Card de Produto (Ajustes finos) === */
+/* ======================================================================== */
+/* Estilos base em card.css */
+
+.product-card {
+    position: relative; /* Contexto para o botão de menu absoluto */
+}
+
+.product-card .product-card-menu-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2; /* Acima do conteúdo */
+}
+
+.product-card .stock-action-button i {
+    font-size: 16px;
+}
+
+/* Texto de aviso para preço indefinido */
+.product-card-price.warning-text {
+    color: var(--feedback-warning);
+    font-weight: 600;
+}

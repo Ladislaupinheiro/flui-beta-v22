@@ -1,0 +1,28 @@
+/* /styles/views/_settings.css - Estilos específicos para a SettingsView */
+
+/* ======================================================================== */
+/* === Layout de Ecrã Inteiro para Formulários === */
+/* ======================================================================== */
+
+/* A classe .view-container é o elemento <form> que engloba toda a página */
+.view-container {
+    /* Garante que o form se comporte como um container de página inteira */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* O .page-header com a classe .sticky-header já está definido para ser fixo. */
+
+/* Faz com que o .page-content ocupe todo o espaço disponível entre o header e o footer */
+.view-container > .page-content {
+    flex-grow: 1;
+}
+
+/* Garante que o botão de fechar no header seja mais proeminente */
+.header-action-btn.close-btn {
+    font-size: 32px;
+    font-weight: 300;
+}
+
+/* O .bottom-action-bar já está definido para ser fixo na parte inferior. */

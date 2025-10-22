@@ -1,0 +1,49 @@
+/* /styles/main.css - O Orquestrador de Estilos (ATUALIZADO) */
+
+/* ======================================================================== */
+/* === 1. A FUNDAÇÃO: Tokens e Estilos de Base === */
+/* ======================================================================== */
+/* Carrega todas as nossas variáveis de design (cores, formas, sombras) */
+/* e define os temas claro e escuro. */
+@import url('./core/tokens.css');
+
+/* Carrega o reset de CSS e os estilos globais do `body`. */
+@import url('./core/base.css');
+
+
+/* ======================================================================== */
+/* === 2. OS TIJOLOS: Componentes Globais Reutilizáveis === */
+/* ======================================================================== */
+/* A ordem aqui importa: componentes mais básicos primeiro. */
+@import url('./components/button.css');
+@import url('./components/card.css');
+@import url('./components/modal.css');
+@import url('./components/form.css');
+@import url('./components/nav-bar.css');
+@import url('./components/fab.css');
+@import url('./components/chip.css');
+@import url('./components/badge.css'); /* <-- NOVA IMPORTAÇÃO */
+@import url('./components/avatar.css');
+@import url('./components/tab-nav.css');
+@import url('./components/accordion.css');
+@import url('./components/calendar.css');
+@import url('./components/toggle-switch.css');
+@import url('./components/toast.css');
+@import url('./components/wizard.css');
+
+
+/* ======================================================================== */
+/* === 3. AS CONSTRUÇÕES: Layouts e Estilos Específicos de Vistas === */
+/* ======================================================================== */
+/* Estilos que são específicos para uma única página ou vista. */
+@import url('./views/page-layouts.css');
+@import url('./views/dashboard.css');
+@import url('./views/client-list.css'); /* Usado por Atendimento e Clientes */
+@import url('./views/cliente-detalhes.css');
+@import url('./views/inventario.css');
+@import url('./views/conta-detalhes.css');
+@import url('./views/settings.css');
+@import url('./views/relatorios.css'); /* Estilos para modais de relatório */
+@import url('./views/fornecedor-detalhes.css');
+@import url('./views/fluxo-caixa.css');
+@import url('./views/analises.css');

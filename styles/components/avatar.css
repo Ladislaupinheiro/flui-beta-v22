@@ -1,0 +1,32 @@
+/* /styles/components/_avatar.css - Estilos para os avatares */
+
+.avatar {
+    /* Tamanho padrão para listas e componentes compactos */
+    width: 48px;
+    height: 48px;
+
+    /* Garante a forma circular */
+    border-radius: 50%;
+
+    /* Assegura que a imagem cubra o espaço sem distorcer */
+    object-fit: cover;
+
+    /* Cor de fundo de fallback e borda sutil */
+    background-color: var(--bg-tertiary);
+    border: 2px solid var(--bg-secondary);
+
+    /* Garante que o avatar não encolha em layouts flexíveis */
+    flex-shrink: 0;
+}
+
+/* Modificador para um avatar de maior destaque, como na página de perfil */
+.avatar.large {
+    width: 96px;
+    height: 96px;
+
+    /* Borda mais proeminente para criar um efeito de anel */
+    border: 4px solid var(--bg-secondary);
+    
+    /* Sombra para dar profundidade e destacar o avatar do fundo */
+    box-shadow: var(--shadow-medium);
+}

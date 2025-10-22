@@ -1,0 +1,60 @@
+/* /styles/components/_toggle-switch.css - Estilos para o componente Toggle Switch */
+
+.toggle-switch-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+/* Esconde o checkbox padrão do navegador */
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* O "trilho" do switch */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-decorative);
+    border-radius: var(--corner-radius-full);
+    transition: var(--transition-fast);
+}
+
+/* O "puxador" do switch */
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-low);
+}
+
+/* --- Estado Ativo (Checked) --- */
+
+.toggle-switch input:checked + .slider {
+    background-color: var(--brand-primary);
+}
+
+.toggle-switch input:checked + .slider::before {
+    /* Move o puxador para a direita */
+    transform: translateX(22px);
+}

@@ -1,0 +1,122 @@
+/* /styles/views/fornecedor-detalhes.css (ATUALIZADO COM OVERLAY DE HISTÓRICO) */
+
+.stats-grid.supplier-stats {
+    display: grid;
+    /* Ajusta para 2 colunas, mas poderia ser auto-fit para mais stats */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px; /* Espaço cria as linhas da grelha */
+    background-color: var(--border-decorative); /* Cor das linhas da grelha */
+    padding: 0; /* Remove padding do card base */
+    overflow: hidden; /* Garante que os filhos respeitem o border-radius do card pai */
+    margin: 0 -16px; /* Remove padding lateral herdado se dentro de .card-body */
+}
+
+.supplier-stats .stat-item {
+    text-align: center;
+    padding: 16px 8px;
+    background-color: var(--bg-secondary); /* Fundo de cada célula */
+}
+
+.supplier-stats .stat-value {
+    font-weight: 700;
+    font-size: 16px; /* Tamanho base do valor */
+    display: flex; /* Para centralizar o conteúdo verticalmente se necessário */
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    line-height: 1.3;
+    min-height: 2.6em; /* Garante altura mínima para alinhar textos de 1 ou 2 linhas */
+    word-break: break-word; /* Quebra palavras longas (nomes de produto) */
+}
+
+.supplier-stats .stat-value.primary {
+    color: var(--brand-primary);
+    font-size: 20px; /* Destaca o valor principal (Gasto Total) */
+}
+
+.supplier-stats .stat-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase; /* Mantém uppercase */
+    margin-top: 4px; /* Pequeno espaço entre valor e label */
+    display: block; /* Garante que o label fique abaixo */
+}
+
+
+/* *** NOVOS ESTILOS PARA O HISTÓRICO "MODAL" (OVERLAY) *** */
+
+.history-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 110; /* Acima do modal normal (100) */
+    padding: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+}
+
+.history-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.history-card {
+    position: relative; /* Contexto para o botão de fechar */
+    background-color: var(--bg-secondary);
+    border-radius: var(--corner-radius-lg);
+    box-shadow: var(--shadow-high);
+    width: 100%;
+    max-width: 420px; /* Largura máxima */
+    max-height: 80vh; /* Altura máxima ajustada */
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95);
+    opacity: 0; /* Começa invisível para animação */
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    overflow: hidden; /* Garante bordas arredondadas */
+}
+
+.history-overlay.visible .history-card {
+    transform: scale(1);
+    opacity: 1; /* Torna visível na animação */
+}
+
+.history-card .card-header { /* Reutiliza estilo base, mas ajusta padding */
+    padding: 16px 48px 16px 16px; /* Mais padding à direita por causa do botão X */
+    border-bottom: 1px solid var(--border-decorative);
+    text-align: center; /* Centraliza título */
+    flex-shrink: 0; /* Evita encolher */
+}
+
+.history-card .card-body-list { /* Reutiliza estilo base */
+    overflow-y: auto; /* Permite scroll se a lista for longa */
+    padding: 16px;
+}
+
+
+.history-card-close-btn {
+    position: absolute;
+    top: 8px; /* Ajusta posicionamento */
+    right: 8px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    line-height: 1;
+    padding: 8px; /* Área de toque maior */
+    z-index: 1;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.history-card-close-btn:hover {
+    background-color: var(--bg-tertiary);
+}

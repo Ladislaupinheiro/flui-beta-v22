@@ -1,0 +1,143 @@
+/* /styles/components/wizard.css (ATUALIZADO COM SLIDER DE PROGRESSO E MARCOS) */
+
+/* Barra de Progresso do Wizard (usada no header do modal) */
+.progress-bar-container {
+    padding: 0 16px; /* Alinha com o padding do header */
+    margin-top: -8px; /* Puxa para baixo do título */
+    margin-bottom: 8px; /* Espaço antes do body */
+}
+.progress-bar {
+    display: flex;
+    gap: 6px;
+    /* width: 100px; */ /* Largura pode ser automática ou definida */
+    max-width: 150px; /* Evita ficar muito largo */
+    margin: 0 auto; /* Centraliza */
+}
+
+.progress-bar-step {
+    flex: 1;
+    height: 4px;
+    background-color: var(--border-decorative);
+    border-radius: var(--corner-radius-full);
+    transition: background-color 0.3s ease;
+}
+
+.progress-bar-step.active {
+    background-color: var(--brand-primary);
+}
+
+/* Grupo de Controles Segmentados (Usado em vários wizards/modais) */
+.segmented-control-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+}
+
+.segmented-control-group .segmented-control-button {
+    padding: 16px 8px; /* Ajuste no padding para caber mais texto se necessário */
+    border: 2px solid var(--border-decorative);
+    border-radius: var(--corner-radius-md);
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-weight: 600;
+    text-align: center; /* Garante centralização do texto */
+    font-size: 14px; /* Ajuste se necessário */
+}
+
+.segmented-control-group .segmented-control-button.active {
+    border-color: var(--brand-primary);
+    background-color: var(--brand-accent);
+    color: var(--brand-primary); /* Ajustado para melhor contraste no accent */
+}
+
+/* Estilização do Input Range (Slider) com Progresso */
+.input-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: var(--corner-radius-full);
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+    cursor: pointer;
+
+    /* Fundo com gradiente controlado por variável CSS (aplicada via JS) */
+    --progress-percent: 50%; /* Default visual */
+    background: linear-gradient(to right, var(--brand-primary) var(--progress-percent), var(--bg-tertiary) var(--progress-percent));
+}
+
+.input-range:hover {
+    opacity: 1;
+}
+
+.input-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--brand-primary-text); /* Cor do "puxador" */
+    border-radius: 50%;
+    cursor: pointer;
+    border: 4px solid var(--brand-primary); /* Borda na cor primária */
+    box-shadow: var(--shadow-medium);
+}
+
+.input-range::-moz-range-thumb {
+    width: 24px; /* Precisa ser definido explicitamente para Firefox */
+    height: 24px;
+    background: var(--brand-primary-text);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 4px solid var(--brand-primary);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Marcadores de escala para o Slider (Opcional) */
+.slider-markers {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 4px 0 4px; /* Alinha com as pontas do slider */
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Estilização específica para containers de wizard */
+.modal-container.wizard-container .modal-header {
+    flex-direction: column; /* Empilha título e progresso */
+    align-items: center; /* Centraliza */
+    padding-bottom: 0; /* Remove padding inferior do header */
+    border-bottom: none; /* Remove borda do header, será no content */
+}
+
+.modal-container.wizard-container .modal-body {
+    padding-top: 8px; /* Menos padding superior no body */
+    border-top: 1px solid var(--border-decorative); /* Borda separadora */
+}
+
+.modal-container.wizard-container .modal-footer {
+     /* Ajusta o footer para ter 2 botões por padrão, se necessário */
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 12px;
+}
+.modal-container.wizard-container .modal-footer.single-button {
+    grid-template-columns: 1fr; /* Para botões full-width */
+}
+
+/* Texto de aviso (usado no passo 3 de preços) */
+.warning-text {
+    font-size: 12px;
+    color: var(--feedback-warning);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+}
+.warning-text i {
+    font-size: 14px;
+}

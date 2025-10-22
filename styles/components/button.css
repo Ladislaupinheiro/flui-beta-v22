@@ -1,0 +1,133 @@
+/* /styles/components/_button.css - Estilos para todos os tipos de botões */
+
+/* ======================================================================== */
+/* === Estilo Base do Botão === */
+/* ======================================================================== */
+
+.button {
+    padding: 12px 24px;
+    border-radius: var(--corner-radius-full);
+    font-weight: 700;
+    font-size: 14px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    line-height: 1; /* Garante alinhamento vertical do ícone/texto */
+}
+
+/* ======================================================================== */
+/* === Variações de Botão === */
+/* ======================================================================== */
+
+/* --- Botão Primário (Alta Ênfase) --- */
+.button-primary {
+    background-color: var(--brand-primary);
+    color: var(--brand-primary-text);
+}
+
+.button-primary:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-medium);
+}
+
+/* --- Botão Secundário (Média Ênfase) --- */
+.button-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-decorative);
+}
+
+.button-secondary:hover:not(:disabled) {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-interactive);
+}
+
+/* --- Botão de Sucesso --- */
+.button-success {
+    background-color: var(--feedback-success);
+    color: var(--feedback-success-text);
+}
+
+/* --- Botão de Erro --- */
+.button-error {
+    background-color: var(--feedback-error);
+    color: var(--feedback-error-text);
+}
+
+/* --- Botão de Texto (Baixa Ênfase) --- */
+.button-text {
+    background: none;
+    border: none;
+    color: var(--brand-primary);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: var(--corner-radius-sm);
+}
+
+.button-text:hover:not(:disabled) {
+    background-color: var(--brand-accent);
+}
+
+/* --- Botão de Ícone (Ações isoladas) --- */
+.button-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+}
+
+.button-icon:hover:not(:disabled) {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.button-icon.delete {
+    color: var(--feedback-error);
+}
+.button-icon.delete:hover {
+    background-color: var(--feedback-error);
+    color: var(--feedback-error-text);
+}
+
+
+/* ======================================================================== */
+/* === Modificadores de Botão === */
+/* ======================================================================== */
+
+.button.small {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+.button.full-width {
+    width: 100%;
+}
+
+.button.dashed {
+    border-style: dashed;
+}
+
+.button:disabled {
+    background-color: var(--border-decorative);
+    color: var(--text-placeholder);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    border-color: transparent;
+}

@@ -1,0 +1,77 @@
+/* /styles/views/dashboard.css (MODERNIZADO COM DASHBOARD PANORÂMICO) */
+
+/* ======================================================================== */
+/* === Cabeçalho do Dashboard (Inalterado) === */
+/* ======================================================================== */
+
+.header-profile { display: flex; align-items: center; gap: 12px; cursor: pointer; flex-grow: 1; min-width: 0; }
+.profile-pic { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background-color: var(--bg-tertiary); flex-shrink: 0; }
+.business-name { font-weight: 700; font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.header-action-btn { background: none; border: none; color: var(--text-secondary); font-size: 24px; cursor: pointer; padding: 8px; border-radius: 50%; transition: var(--transition-fast); }
+.header-action-btn:hover { background-color: var(--bg-tertiary); color: var(--text-primary); }
+
+
+/* ======================================================================== */
+/* === Novo Dashboard Panorâmico (Swiper) === */
+/* ======================================================================== */
+
+.dashboard-swiper-container {
+    width: 100%;
+    overflow: hidden; /* Garante que os slides não "vazem" */
+    padding-bottom: 24px; /* Espaço para a paginação */
+}
+
+.dashboard-slide .card {
+    height: 100%; /* Força os cards a terem a mesma altura dentro do slide */
+}
+
+/* Paginação específica para o dashboard */
+.dashboard-swiper-container .swiper-pagination {
+    bottom: 0 !important;
+}
+.dashboard-swiper-container .swiper-pagination-bullet-active {
+    background-color: var(--brand-primary);
+}
+
+
+/* ======================================================================== */
+/* === Card de Estatística (Vendas, Pulso) === */
+/* ======================================================================== */
+
+.stat-card .card-header { text-align: center; justify-content: center; font-size: 14px; font-weight: 600; color: var(--text-secondary); }
+.stat-card .card-body { align-items: center; gap: 8px; justify-content: center; }
+.stat-primary { font-size: 36px; font-weight: 800; color: var(--brand-primary); line-height: 1.2; }
+.stat-secondary-group { display: flex; gap: 24px; border-top: 1px solid var(--border-decorative); padding-top: 12px; margin-top: 8px; width: 100%; justify-content: center; }
+.stat-secondary-group.vertical { flex-direction: column; gap: 8px; align-items: center; }
+.stat-secondary { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-secondary); }
+.stat-secondary b { font-weight: 600; color: var(--text-primary); }
+.stat-detail { font-size: 12px; color: var(--text-secondary); }
+.stat-detail strong { color: var(--text-primary); }
+
+
+/* ======================================================================== */
+/* === Conteúdo dos Cards Fixos (Alertas, Top Produtos) === */
+/* ======================================================================== */
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+.list-item span:first-child { font-weight: 500; }
+.list-item span:last-child { font-weight: 600; color: var(--text-secondary); }
+
+/* NOVO: Estilo para os itens de alerta clicáveis */
+.alert-item {
+    cursor: pointer;
+    padding: 4px 0;
+    border-radius: var(--corner-radius-sm);
+}
+.alert-item:hover {
+    background-color: var(--bg-tertiary);
+}
+.alert-item .text-error {
+    color: var(--feedback-error);
+    font-weight: 600;
+}

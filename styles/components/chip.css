@@ -1,0 +1,68 @@
+/* /styles/components/chip.css (CORRIGIDO) */
+
+/* ======================================================================== */
+/* === Chip de Informação (Estático) === */
+/* ======================================================================== */
+/* Usado para exibir tags, como as dos clientes. */
+
+.chip {
+    padding: 2px 10px;
+    border-radius: var(--corner-radius-full);
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+
+/* ======================================================================== */
+/* === Chip de Filtro (Interativo) === */
+/* ======================================================================== */
+/* Usado em barras de filtro para selecionar opções. */
+
+.filter-bar {
+    padding: 0 16px 8px 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Esconde a barra de scroll no Chrome, Safari e Opera */
+.filter-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-chip {
+    padding: 8px 16px;
+    border-radius: var(--corner-radius-full);
+    font-weight: 600;
+    font-size: 14px;
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-decorative);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.filter-chip:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-interactive);
+}
+
+/* *** CORREÇÃO APLICADA AQUI *** */
+.filter-chip.active {
+    background-color: var(--brand-primary);
+    color: var(--brand-primary-text);
+    border-color: var(--brand-primary);
+}

@@ -1,0 +1,136 @@
+/* /styles/views/_relatorios.css - Estilos para os modais de relatórios e performance */
+
+/* ======================================================================== */
+/* === Estilos para o Modal de Fecho Global === */
+/* ======================================================================== */
+
+.report-date {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.report-section {
+    padding: 16px 0;
+    border-top: 1px solid var(--border-decorative);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.report-section:first-of-type {
+    border-top: none;
+}
+
+.report-highlight-card {
+    border-radius: var(--corner-radius-md);
+    padding: 12px;
+    text-align: center;
+}
+.highlight-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.highlight-label.bold {
+    font-weight: 700;
+}
+.highlight-value {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+.highlight-value.small { font-size: 18px; }
+.highlight-value.large { font-size: 36px; }
+
+/* Variações de cor para os cards de destaque */
+.report-highlight-card.primary { background-color: var(--brand-accent); color: var(--brand-primary-text); }
+.report-highlight-card.primary .highlight-value { color: var(--brand-primary); }
+.report-highlight-card.success { background-color: var(--feedback-success); color: var(--feedback-success-text); }
+.report-highlight-card.success.bordered { background-color: transparent; border: 2px solid var(--feedback-success); }
+.report-highlight-card.error { background-color: var(--feedback-error); color: var(--feedback-error-text); }
+
+.report-section.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.report-stat-item {
+    text-align: center;
+}
+.stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+.stat-value {
+    font-weight: 600;
+    display: block;
+}
+
+.report-section-title {
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.list-condensed {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.list-condensed.scrollable {
+    max-height: 160px;
+    overflow-y: auto;
+    padding-right: 8px; /* Espaço para a barra de scroll */
+}
+.list-item-condensed {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    background-color: var(--bg-tertiary);
+    padding: 8px 12px;
+    border-radius: var(--corner-radius-sm);
+}
+
+/* ======================================================================== */
+/* === Estilos para os Modais de Performance (Produto/Cliente) === */
+/* ======================================================================== */
+
+.performance-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-decorative);
+}
+.performance-list-item:last-child {
+    border-bottom: none;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.item-rank {
+    font-weight: 600;
+    color: var(--text-secondary);
+    width: 20px;
+}
+.item-name {
+    font-weight: 500;
+}
+.item-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+.item-value {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.item-value .text-success {
+    color: var(--feedback-success);
+    font-weight: 700;
+}

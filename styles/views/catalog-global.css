@@ -1,0 +1,51 @@
+/* /styles/views/catalog-global.css (NOVO) */
+
+/* ======================================================================== */
+/* === Estilos para a Vista de Gestão do Catálogo Global === */
+/* ======================================================================== */
+
+/* A estrutura base (header, search-bar, page-content, list-container, fab)
+   já está coberta por page-layouts.css, form.css e fab.css.
+   Focamos nos estilos específicos do item do catálogo. */
+
+.catalog-item-card {
+    display: flex; /* Alinha info e ações lado a lado */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between; /* Empurra ações para a direita */
+    padding: 12px 16px; /* Padding interno do card */
+    gap: 16px; /* Espaço entre info e ações */
+    /* Herda estilos base de .card (fundo, borda, sombra, etc.) */
+}
+
+.catalog-item-info {
+    display: flex;
+    flex-direction: column; /* Empilha nome e categoria */
+    gap: 2px; /* Pequeno espaço entre nome e categoria */
+    min-width: 0; /* Permite que o texto quebre corretamente */
+}
+
+.catalog-item-name {
+    font-weight: 600; /* Nome em negrito */
+    font-size: 16px;
+    white-space: nowrap; /* Evita quebra de linha inicial */
+    overflow: hidden; /* Esconde o excesso */
+    text-overflow: ellipsis; /* Adiciona "..." */
+}
+
+.catalog-item-category {
+    font-size: 12px;
+    color: var(--text-secondary); /* Cor secundária para a categoria */
+    text-transform: capitalize; /* Capitaliza a tag/categoria */
+}
+
+.catalog-item-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Evita que os botões encolham */
+    /* Os botões (.button-icon) já têm estilo definido em button.css */
+}
+
+/* Ajuste opcional para hover no card (se desejado) */
+.catalog-item-card:hover {
+     background-color: var(--bg-tertiary);
+}

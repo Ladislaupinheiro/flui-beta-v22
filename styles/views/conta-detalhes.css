@@ -1,0 +1,220 @@
+/* /styles/views/_conta-detalhes.css - Estilos para a vista de detalhe da conta */
+
+/* ======================================================================== */
+/* === Cabeçalho Fixo com Filtros === */
+/* ======================================================================== */
+
+.page-header.with-filters .segmented-control {
+    width: 100%;
+    display: flex;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--corner-radius-full);
+    padding: 4px;
+}
+.segmented-control-button {
+    flex: 1;
+    padding: 6px 14px;
+    border: none;
+    background-color: transparent;
+    border-radius: var(--corner-radius-full);
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+.segmented-control-button.active {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-low);
+}
+
+/* ======================================================================== */
+/* === Cartão de Sumário da Conta === */
+/* ======================================================================== */
+
+.account-summary-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+}
+
+.account-summary-client {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.account-summary-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn-client-actions {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.account-summary-total {
+    text-align: right;
+}
+.total-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+.total-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--feedback-success);
+    display: block;
+}
+
+/* ======================================================================== */
+/* === Cartão de Pedido (Item da Lista) === */
+/* ======================================================================== */
+
+.order-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 8px 12px 16px; /* Menos padding à direita para o botão */
+}
+.order-card-details {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.order-card-quantity {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--brand-primary);
+}
+.order-card-name {
+    font-weight: 500;
+}
+.order-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.order-card-price {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+.order-card-menu-btn {
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Cores das categorias de pedidos */
+.order-group-alcool { color: #F59E0B; }
+.order-group-sem-alcool { color: #3B82F6; }
+
+
+/* ======================================================================== */
+/* === Prateleira de Produtos (Footer) === */
+/* ======================================================================== */
+.bottom-action-bar.expanded {
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.shelf-container {
+    background-color: var(--bg-primary);
+    border-radius: var(--corner-radius-md);
+    padding: 8px;
+    box-shadow: inset 0 2px 4px rgba(var(--shadow-color), 0.06);
+}
+.shelf-item-slide {
+    width: auto; /* Permite que os slides tenham larguras diferentes */
+}
+.shelf-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    height: 80px;
+    width: 80px;
+    padding: 4px;
+    border: 1px solid var(--border-decorative);
+    border-radius: var(--corner-radius-md);
+    background-color: var(--bg-secondary);
+    cursor: pointer;
+}
+.stock-badge-group {
+    display: flex;
+    gap: 4px;
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+.stock-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    box-shadow: var(--shadow-low);
+    background-color: var(--feedback-success);
+}
+.stock-badge.secondary {
+    background-color: #3B82F6;
+}
+.shelf-item-name {
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+.selection-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--brand-primary);
+    margin-top: 4px;
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+.selection-indicator.visible {
+    opacity: 1;
+}
+
+/* ======================================================================== */
+/* === Split Button (Footer) === */
+/* ======================================================================== */
+.split-button {
+    display: flex;
+    width: 100%;
+}
+.split-button-main {
+    flex-grow: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 1px;
+    border-right-color: rgba(255, 255, 255, 0.2);
+}
+.split-button-trigger {
+    flex-shrink: 0;
+    width: 56px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

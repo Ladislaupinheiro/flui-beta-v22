@@ -1,0 +1,149 @@
+/* /styles/core/_tokens.css - A Fonte da Verdade Para o Nosso Design System */
+
+:root {
+    /* ======================================================================== */
+    /* === Paletas Tonais === */
+    /* ======================================================================== */
+
+    /* --- Paleta Tonal: Primary (Gerada a partir de #39DB7D) --- */
+    --palette-primary-10: #00210E;
+    --palette-primary-20: #00391C;
+    --palette-primary-30: #005229;
+    --palette-primary-40: #006D38;
+    --palette-primary-80: #64DD8F;
+    --palette-primary-90: #83F893;
+
+    /* --- Paleta Tonal: Neutral (Gerada a partir de #0F171A) --- */
+    --palette-neutral-4: #0A0F14;
+    --palette-neutral-6: #0F171A;
+    --palette-neutral-10: #1A2329;
+    --palette-neutral-12: #1E2932;
+    --palette-neutral-17: #293841;
+    --palette-neutral-22: #334855;
+    --palette-neutral-24: #384E5A;
+    --palette-neutral-90: #E1EAF0;
+    --palette-neutral-95: #F0F8FF;
+    --palette-neutral-98: #F8FBFF;
+    --palette-neutral-99: #FBFDFE;
+    --palette-neutral-100: #FFFFFF;
+    
+    /* --- Cores de Feedback Semânticas --- */
+    --feedback-error-base: #B3261E;
+    --feedback-error-light: #F2B8B5;
+    --feedback-error-dark-text: #601410;
+    --feedback-error-light-text: #410002;
+    --feedback-success-base: #198754;
+    --feedback-success-light: #64DD8F;
+    --feedback-success-dark-text: #00391C;
+    --feedback-warning-base: #FFC107;
+    --feedback-warning-text: #332700;
+
+    /* ======================================================================== */
+    /* === Escalas de Design === */
+    /* ======================================================================== */
+
+    /* --- Escala de Forma (Arredondamento) --- */
+    --corner-radius-sm: 8px;
+    --corner-radius-md: 12px;
+    --corner-radius-lg: 16px;
+    --corner-radius-full: 9999px;
+
+    /* --- Escala de Sombra (Elevação) --- */
+    --shadow-low: 0 1px 2px 0 rgba(var(--shadow-color), 0.08);
+    --shadow-medium: 0 4px 6px -1px rgba(var(--shadow-color), 0.12), 0 2px 4px -2px rgba(var(--shadow-color), 0.12);
+    --shadow-high: 0 10px 15px -3px rgba(var(--shadow-color), 0.15), 0 4px 6px -4px rgba(var(--shadow-color), 0.15);
+    
+    /* --- Transições --- */
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-medium: all 0.3s ease-in-out;
+
+
+/* *** NOVA: Escala Tipográfica Formal *** */
+    --font-size-display: 24px;
+    --font-size-headline: 20px;
+    --font-size-body: 16px;
+    --font-size-label: 14px;
+    --font-size-caption: 12px;
+    --font-weight-regular: 400;
+    --font-weight-medium: 600;
+    --font-weight-bold: 700;
+
+    /* *** NOVA: Escala de Espaçamento Formal *** */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+}
+
+/* ======================================================================== */
+/* === TEMA CLARO (LIGHT THEME) - MAPEAMENTO DE FUNÇÕES === */
+/* ======================================================================== */
+:root {
+    /* Cores de Superfície */
+    --bg-primary: var(--palette-neutral-98);
+    --bg-secondary: var(--palette-neutral-100);
+    --bg-tertiary: var(--palette-neutral-95);
+
+    /* Cores de Conteúdo */
+    --text-primary: var(--palette-neutral-10);
+    --text-secondary: #5a6d7a;
+    --text-placeholder: #8a9ba8;
+    
+    /* Cores de Ação (Marca) */
+    --brand-primary: var(--palette-primary-40);
+    --brand-primary-text: var(--palette-neutral-100);
+    --brand-accent: var(--palette-primary-90);
+
+    /* Cores de Feedback */
+    --feedback-success: var(--feedback-success-base);
+    --feedback-success-text: var(--palette-neutral-100);
+    --feedback-error: var(--feedback-error-base);
+    --feedback-error-text: var(--palette-neutral-100);
+    --feedback-warning: var(--feedback-warning-base);
+    --feedback-warning-text: var(--feedback-warning-text);
+    
+    /* Cores de Borda e Divisórias */
+    --border-interactive: #8a9ba8;
+    --border-decorative: var(--palette-neutral-90);
+
+    /* Cor Base da Sombra */
+    --shadow-color: 0, 0, 0; /* R, G, B */
+}
+
+/* ======================================================================== */
+/* === TEMA ESCURO (DARK THEME) - MAPEAMENTO DE FUNÇÕES === */
+/* ======================================================================== */
+html[data-theme='dark'] {
+    /* Cores de Superfície */
+    --bg-primary: var(--palette-neutral-6);
+    --bg-secondary: var(--palette-neutral-12);
+    --bg-tertiary: var(--palette-neutral-10);
+
+    /* Cores de Conteúdo */
+    --text-primary: var(--palette-neutral-98);
+    --text-secondary: #8a9ba8;
+    --text-placeholder: #5a6d7a;
+
+    /* Cores de Ação (Marca) */
+    --brand-primary: var(--palette-primary-80);
+    --brand-primary-text: var(--palette-primary-20);
+    --brand-accent: var(--palette-primary-30);
+
+    /* Cores de Feedback */
+    --feedback-success: var(--feedback-success-light);
+    --feedback-success-text: var(--feedback-success-dark-text);
+    --feedback-error: var(--feedback-error-light);
+    --feedback-error-text: var(--feedback-error-light-text);
+    --feedback-warning: var(--feedback-warning-base);
+    --feedback-warning-text: var(--feedback-warning-text);
+
+    /* Cores de Borda e Divisórias */
+    --border-interactive: #5a6d7a;
+    --border-decorative: var(--palette-neutral-24);
+    
+    /* Cor Base da Sombra */
+    --shadow-color: 0, 0, 0; /* R, G, B */
+}

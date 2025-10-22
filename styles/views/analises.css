@@ -1,0 +1,49 @@
+/* /styles/views/analises.css (NOVO) */
+
+/* ======================================================================== */
+/* === Layouts Específicos da AnálisesView === */
+/* ======================================================================== */
+
+/* Adapta a grelha de KPIs para 3 colunas na vista de "Vendas" */
+#analises-subview-container .stats-grid.kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+/* Para a vista de "Clientes", força 2 colunas */
+#analises-subview-container .stats-grid.kpi-grid:has(.stat-item:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Container para o gráfico de tendências */
+.chart-container {
+    position: relative;
+    min-height: 250px;
+    padding: 16px;
+}
+
+/* Grelha para o sumário operacional na vista "Vendas" */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 16px 0;
+    border-top: 1px solid var(--border-decorative);
+}
+
+.summary-item {
+    text-align: center;
+    padding: 0 8px;
+}
+.summary-item:first-child {
+    border-right: 1px solid var(--border-decorative);
+}
+
+.summary-value {
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+    color: var(--text-primary);
+}
+
+.summary-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}

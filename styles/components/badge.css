@@ -1,0 +1,43 @@
+/* /styles/components/badge.css (NOVO) */
+
+.badge {
+    position: absolute;
+    top: 4px;
+    right: 12px;
+    
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+
+    background-color: var(--feedback-error);
+    color: var(--feedback-error-text);
+    
+    border-radius: var(--corner-radius-full);
+    border: 2px solid var(--bg-secondary);
+
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 14px; /* Garante que o texto fique centrado verticalmente */
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Animação para quando o badge aparece */
+    transform: scale(0.8);
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+
+.badge.visible {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Para posicionamento em itens de navegação */
+.nav-item .badge {
+    /* Ajusta a posição para o ícone da nav-bar */
+    top: 6px;
+    right: calc(50% - 28px);
+}

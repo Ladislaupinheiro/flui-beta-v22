@@ -1,0 +1,80 @@
+/* /styles/components/_nav-bar.css - Estilos para a Barra de Navegação principal */
+
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 64px; /* Altura ergonômica padrão */
+    background-color: var(--bg-secondary);
+    display: grid;
+    /* O número de colunas é definido pelo número de itens no HTML */
+    grid-template-columns: repeat(6, 1fr);
+    z-index: 90;
+    border-top: 1px solid var(--border-decorative);
+}
+
+.nav-item {
+    position: relative; /* Define o contexto para o posicionamento do indicador */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: var(--transition-fast);
+    gap: 2px;
+}
+
+.nav-item-indicator {
+    position: absolute;
+    /* Centraliza o indicador no meio do item */
+    top: 50%;
+    left: 50%;
+    width: 64px;
+    height: 32px;
+    /* Ajusta a posição vertical para se alinhar com o ícone */
+    margin-top: -20px;
+    margin-left: -32px; /* Metade da largura */
+    
+    background-color: var(--brand-accent);
+    border-radius: var(--corner-radius-full);
+    
+    /* Estado inicial (inativo) */
+    opacity: 0;
+    transform: scale(0.8);
+    transition: var(--transition-medium);
+}
+
+.nav-item-icon {
+    position: relative; /* Garante que o ícone fica por cima do indicador */
+    z-index: 1;
+    font-size: 22px;
+    transition: var(--transition-fast);
+}
+
+.nav-item-label {
+    position: relative; /* Garante que o texto fica por cima do indicador */
+    z-index: 1;
+    font-size: 11px;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+/* --- Estilos para o estado ATIVO --- */
+
+.nav-item.active .nav-item-indicator {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nav-item.active .nav-item-icon {
+    color: var(--brand-primary);
+}
+
+.nav-item.active .nav-item-label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
