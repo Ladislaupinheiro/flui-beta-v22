@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flui</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#006D38">
+    <link rel="apple-touch-icon" href="icons/logo-small-192.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://unpkg.com/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/swiper@11/swiper-element-bundle.min.js"></script>
+    <script src="https://unpkg.com/@yaireo/tagify"></script>
+    <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/morphdom"></script>
+    
+    <script type="module" src="./modules/app/app.js" defer></script>
+</head>
+<body>
+
+    <main id="app-root"></main>
+
+    <div id="modals-container"></div>
+
+    <div id="toast-container"></div>
+    <div id="offline-indicator" class="offline-indicator">Modo Offline</div>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('[Main] Service Worker registado com sucesso.'))
+                    .catch(err => console.log('[Main] Falha ao registar o Service Worker:', err));
+            });
+        }
+
+        const updateOnlineStatus = () => {
+            if (navigator.onLine) {
+                document.body.classList.remove('offline');
+            } else {
+                document.body.classList.add('offline');
+            }
+        };
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        updateOnlineStatus();
+    </script>
+</body>
+</html>
