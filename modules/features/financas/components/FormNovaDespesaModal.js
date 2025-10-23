@@ -1,10 +1,16 @@
-// /modules/features/financas/components/FormNovaDespesaModal.js (REFATORADO COM ESTRUTURA SEMÂNTICA)
+// /modules/features/financas/components/FormNovaDespesaModal.js (SELEÇÃO DE PAGAMENTO PADRONIZADA)
 'use strict';
 
 import store from '../../../shared/services/Store.js';
 import * as Toast from '../../../shared/components/Toast.js';
 
-export const render = () => `
+let metodoSelecionado = 'Numerário'; // Estado local para o método
+
+export const render = () => {
+    // Reseta o estado local ao renderizar
+    metodoSelecionado = 'Numerário';
+
+    return `
 <div id="modal-nova-despesa-overlay" class="modal-overlay">
     <form id="form-nova-despesa" class="modal-container">
         <header class="modal-header">
@@ -18,14 +24,15 @@ export const render = () => `
             </div>
             <div class="form-group">
                 <label for="input-despesa-valor" class="form-label">Valor (Kz)</label>
-                <input type="number" id="input-despesa-valor" required min="1" class="input-field">
+                <input type="number" id="input-despesa-valor" required min="1" class="input-field" placeholder="0,00">
             </div>
+           
             <div class="form-group">
-                <label for="select-despesa-metodo" class="form-label">Método de Pagamento</label>
-                <select id="select-despesa-metodo" class="input-field">
-                    <option value="Numerário">Numerário</option>
-                    <option value="TPA">TPA</option>
-                </select>
+                <label class="form-label">Método de Pagamento</label>
+                <div id="metodo-pagamento-despesa-group" class="segmented-control-group">
+                    <button type="button" class="segmented-control-button ${metodoSelecionado === 'Numerário' ? 'active' : ''}" data-metodo="Numerário">Numerário</button>
+                    <button type="button" class="segmented-control-button ${metodoSelecionado === 'TPA' ? 'active' : ''}" data-metodo="TPA">TPA</button>
+                </div>
             </div>
         </div>
         <footer class="modal-footer">
@@ -33,16 +40,28 @@ export const render = () => `
         </footer>
     </form>
 </div>`;
+}
 
 export const mount = (closeModal) => {
     const form = document.getElementById('form-nova-despesa');
+    const metodoGroup = form.querySelector('#metodo-pagamento-despesa-group');
     form.querySelector('#input-despesa-descricao').focus();
+
+    // Listener para os botões de método de pagamento
+    metodoGroup?.addEventListener('click', e => {
+        const target = e.target.closest('[data-metodo]');
+        if (target) {
+            metodoSelecionado = target.dataset.metodo;
+            metodoGroup.querySelectorAll('.segmented-control-button').forEach(btn => btn.classList.remove('active'));
+            target.classList.add('active');
+        }
+    });
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const descricao = form.querySelector('#input-despesa-descricao').value.trim();
         const valor = parseFloat(form.querySelector('#input-despesa-valor').value);
-        const metodoPagamento = form.querySelector('#select-despesa-metodo').value;
+        // O método de pagamento agora vem do estado local 'metodoSelecionado'
 
         if (!descricao || !valor || valor <= 0) {
             return Toast.mostrarNotificacao("Preencha a descrição e um valor válido.", "erro");
@@ -53,16 +72,16 @@ export const mount = (closeModal) => {
             data: new Date().toISOString(),
             descricao,
             valor,
-            metodoPagamento
+            metodoPagamento: metodoSelecionado // Usa o valor selecionado
         };
-        
+
         store.dispatch({ type: 'ADD_EXPENSE', payload: novaDespesa });
         Toast.mostrarNotificacao("Despesa registada com sucesso.");
         closeModal();
     });
 
     form.querySelector('.modal-close-button').addEventListener('click', closeModal);
-    
+
     document.getElementById('modal-nova-despesa-overlay').addEventListener('click', e => {
         if (e.target.id === 'modal-nova-despesa-overlay') {
             closeModal();
@@ -70,4 +89,6 @@ export const mount = (closeModal) => {
     });
 };
 
-export const unmount = () => {};
+export const unmount = () => {
+    metodoSelecionado = 'Numerário'; // Reseta o estado local
+};

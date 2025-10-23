@@ -1,9 +1,8 @@
-// /modules/features/inventario/components/FornecedoresList.js (MODULARIZADO)
+// /modules/features/inventario/components/FornecedoresList.js (CORRIGIDO: Espaçamento Superior)
 'use strict';
 
 import store from '../../../shared/services/Store.js';
 import Router from '../../../app/Router.js';
-// *** ALTERAÇÃO: Importa do novo serviço dedicado a fornecedores ***
 import { getFornecedorProfile } from '../services/SupplierAnalyticsService.js';
 import { formatarMoeda } from '../../../shared/lib/utils.js';
 
@@ -13,11 +12,11 @@ let unsubscribe = null;
 function renderList() {
     const state = store.getState();
     const fornecedores = state.fornecedores;
-    
+
     if (fornecedores.length === 0) {
-        return `<div class="empty-state-container"><p>Adicione um fornecedor para começar a registar as suas compras de mercadoria.</p></div>`;
+        return `<div class="empty-state-container" style="padding-top: var(--space-8);"><p>Adicione um fornecedor para começar a registar as suas compras de mercadoria.</p></div>`;
     }
-    
+
     const listHTML = fornecedores.map(f => {
         const profile = getFornecedorProfile(f.id, state);
         return `
@@ -35,7 +34,8 @@ function renderList() {
         `;
     }).join('');
 
-    return `<div class="list-container">${listHTML}</div>`;
+    // *** CORREÇÃO APLICADA AQUI: Adiciona padding-top ao container da lista ***
+    return `<div class="list-container" style="padding: var(--space-4) var(--space-4) 0;">${listHTML}</div>`;
 }
 
 function handleContainerClick(e) {
@@ -51,16 +51,16 @@ export function render() {
 
 export function mount(container) {
     containerNode = container;
-    
-    // O conteúdo já é renderizado pelo orquestrador (InventarioView)
-    // containerNode.innerHTML = renderList(); 
-    
+
+    // Renderiza o conteúdo inicial DENTRO do container fornecido
+    containerNode.innerHTML = renderList();
+
     containerNode.addEventListener('click', handleContainerClick);
-    
+
     unsubscribe = store.subscribe(() => {
         if (containerNode) {
             const newHTML = renderList();
-            // Usa morphdom para atualizações eficientes
+            // Morphdom atualiza o conteúdo DENTRO do containerNode
             morphdom(containerNode, `
                 <div id="${containerNode.id}" class="${containerNode.className}">
                     ${newHTML}
@@ -69,6 +69,7 @@ export function mount(container) {
         }
     });
 }
+
 
 export function unmount() {
     if (unsubscribe) unsubscribe();

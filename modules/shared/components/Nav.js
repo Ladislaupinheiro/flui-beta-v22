@@ -1,7 +1,5 @@
-// /modules/shared/components/Nav.js (REFATORADO COM BADGE DE ALERTA DE STOCK)
+// /modules/shared/components/Nav.js (CORRIGIDO: Lógica do Estado Ativo)
 'use strict';
-
-import Router from '../../app/Router.js';
 import store from '../services/Store.js';
 import { countLowStockItems } from '../../features/inventario/services/ProductAnalyticsService.js';
 
@@ -11,7 +9,7 @@ let unsubscribe = null;
 function updateStockAlertBadge() {
     const lowStockCount = countLowStockItems(store.getState());
     const badge = sel.navContainer?.querySelector('#stock-alert-badge');
-    
+
     if (badge) {
         if (lowStockCount > 0) {
             badge.textContent = lowStockCount;
@@ -67,7 +65,7 @@ function mount() {
     sel.navContainer.addEventListener('click', (event) => {
         const navBtn = event.target.closest('.nav-item');
         if (!navBtn || !navBtn.dataset.hash) return;
-        
+
         if (navBtn.classList.contains('active')) {
             const appRoot = document.getElementById('app-root');
             if (appRoot) {
@@ -80,7 +78,6 @@ function mount() {
         }
     });
 
-    // Atualiza o badge na montagem inicial e subscreve a futuras mudanças
     updateStockAlertBadge();
     unsubscribe = store.subscribe(updateStockAlertBadge);
 }
@@ -90,24 +87,41 @@ function unmount() {
         unsubscribe();
         unsubscribe = null;
     }
+    // O event listener é removido quando o elemento #bottom-nav é potencialmente removido/recriado,
+    // mas adicionar um removeEventListener explícito seria mais robusto se a Nav fosse dinâmica.
 }
 
+// *** LÓGICA DE ATUALIZAÇÃO CORRIGIDA AQUI ***
 function updateActiveState(currentHash) {
     if (!sel.navContainer) {
         sel.navContainer = document.getElementById('bottom-nav');
         if (!sel.navContainer) return;
     }
-    
-    const baseHash = currentHash.split('/')[0] || '#dashboard';
 
+    // 1. Extrai a base da rota atual (antes do '/')
+    const baseRoute = currentHash.split('/')[0] || '#dashboard';
+
+    // 2. Mapeia rotas de detalhe para as suas rotas principais na Nav Bar
+    let targetNavHash = baseRoute;
+    if (baseRoute === '#cliente-detalhes') {
+        targetNavHash = '#clientes';
+    } else if (baseRoute === '#fornecedor-detalhes') {
+        targetNavHash = '#inventario';
+    } else if (baseRoute === '#conta-detalhes') {
+        targetNavHash = '#atendimento';
+    }
+    // Adicionar outros mapeamentos se necessário (ex: sub-páginas de settings mapeariam para '#settings', se existisse na nav)
+
+    // 3. Atualiza a classe 'active' comparando com o hash mapeado
     sel.navContainer.querySelectorAll('.nav-item').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.hash === baseHash);
+        btn.classList.toggle('active', btn.dataset.hash === targetNavHash);
     });
 }
+
 
 export default {
     render,
     mount,
-    unmount, // Exporta a função de unmount para ser chamada se necessário
+    unmount,
     updateActiveState
 };

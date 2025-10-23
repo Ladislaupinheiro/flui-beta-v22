@@ -1,9 +1,8 @@
-// /modules/features/financas/components/HojeSubView.js (NOVO)
+// /modules/features/financas/components/HojeSubView.js (FOOTER REMOVIDO)
 'use strict';
 
 import store from '../../../shared/services/Store.js';
-import { abrirModalFechoGlobal } from '../../../shared/components/Modals.js';
-import { calcularRelatorioDia } from '../services/ReportingService.js';
+// abrirModalFechoGlobal e calcularRelatorioDia não são mais necessários aqui
 import { getFinancialSummaryForToday, getIncomeSourceDistribution } from '../services/CashFlowService.js';
 import { formatarMoeda } from '../../../shared/lib/utils.js';
 
@@ -64,6 +63,7 @@ function render() {
         `;
     }).join('') : `<div class="empty-state-container"><p>Nenhuma transação registada hoje.</p></div>`;
 
+    // *** FOOTER REMOVIDO DAQUI ***
     return `
         <div class="kpi-highlight">
             <span class="kpi-label">Saldo Atual do Dia</span>
@@ -81,31 +81,31 @@ function render() {
                 <div class="accordion-content"><div class="chart-container" style="min-height: 200px;"><canvas id="income-source-chart"></canvas></div></div>
             </details>
         </div>
-        <div class="bottom-action-bar">
-            <button id="btn-arquivar-dia" class="button button-primary full-width">
-                <i class="lni lni-archive"></i> Arquivar e Fechar Dia
-            </button>
-        </div>
+       
     `;
 }
 
-function handleContainerClick(e) {
-    if (e.target.closest('#btn-arquivar-dia')) {
-        abrirModalFechoGlobal(calcularRelatorioDia(store.getState()), false);
-    }
-}
+// *** handleContainerClick REMOVIDO pois não há mais ações locais ***
+// function handleContainerClick(e) { ... }
 
 export function mount(container) {
     containerNode = container;
     containerNode.innerHTML = render();
     renderIncomeSourceChart();
-    
-    containerNode.addEventListener('click', handleContainerClick);
-    
+
+    // *** Listener de clique removido ***
+    // containerNode.addEventListener('click', handleContainerClick);
+
     unsubscribe = store.subscribe(() => {
         if(containerNode) {
-            containerNode.innerHTML = render();
-            renderIncomeSourceChart();
+            // Usa morphdom para atualizar eficientemente
+            const newHTML = render();
+            morphdom(containerNode, `
+                <div id="${containerNode.id}" class="${containerNode.className}">
+                    ${newHTML}
+                </div>
+            `, { childrenOnly: true });
+            renderIncomeSourceChart(); // Re-renderiza o gráfico após atualização do DOM
         }
     });
 }
@@ -113,9 +113,10 @@ export function mount(container) {
 export function unmount() {
     if (unsubscribe) unsubscribe();
     if (incomeSourceChart) incomeSourceChart.destroy();
-    
-    containerNode?.removeEventListener('click', handleContainerClick);
-    
+
+    // *** Listener de clique removido ***
+    // containerNode?.removeEventListener('click', handleContainerClick);
+
     containerNode = null;
     unsubscribe = null;
     incomeSourceChart = null;

@@ -73,29 +73,32 @@ function renderPurchaseCompositionChart() {
 }
 
 function render() {
+    // *** CORREÇÃO APLICADA AQUI: Adiciona um wrapper com flex e gap ***
     return `
-        <div class="card">
-            <details class="accordion-item" open>
-                <summary class="accordion-header" style="padding: 16px;">
-                    <h4 class="accordion-title">Evolução de Compras</h4>
-                    <i class="accordion-icon lni lni-chevron-down"></i>
-                </summary>
-                <div class="accordion-content">
-                    <div class="chart-container"><canvas id="spending-history-chart"></canvas></div>
-                </div>
-            </details>
-        </div>
-        
-        <div class="card">
-             <details class="accordion-item" open>
-                <summary class="accordion-header" style="padding: 16px;">
-                    <h4 class="accordion-title">Composição de Compras</h4>
-                    <i class="accordion-icon lni lni-chevron-down"></i>
-                </summary>
-                <div class="accordion-content">
-                    <div class="chart-container"><canvas id="purchase-composition-chart"></canvas></div>
-                </div>
-            </details>
+        <div class="analytics-cards-wrapper" style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <div class="card">
+                <details class="accordion-item" open>
+                    <summary class="accordion-header" style="padding: var(--space-4);">
+                        <h4 class="accordion-title">Evolução de Compras</h4>
+                        <i class="accordion-icon lni lni-chevron-down"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <div class="chart-container"><canvas id="spending-history-chart"></canvas></div>
+                    </div>
+                </details>
+            </div>
+            
+            <div class="card">
+                 <details class="accordion-item" open>
+                    <summary class="accordion-header" style="padding: var(--space-4);">
+                        <h4 class="accordion-title">Composição de Compras</h4>
+                        <i class="accordion-icon lni lni-chevron-down"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <div class="chart-container"><canvas id="purchase-composition-chart"></canvas></div>
+                    </div>
+                </details>
+            </div>
         </div>
     `;
 }

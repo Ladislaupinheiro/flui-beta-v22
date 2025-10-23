@@ -1,4 +1,4 @@
-// /modules/app/app.js - O Orquestrador Principal da Aplicação (ATUALIZADO COM PWASERVICE)
+// /modules/app/app.js - O Orquestrador Principal da Aplicação (ATUALIZADO COM SnackbarService)
 'use strict';
 
 import store, { carregarEstadoInicial } from '../shared/services/Store.js';
@@ -6,7 +6,8 @@ import Router from './Router.js';
 import * as Modals from '../shared/components/Modals.js';
 import * as Toast from '../shared/components/Toast.js';
 import ThemeService from '../shared/services/ThemeService.js';
-import PWAService from '../shared/services/PWAService.js'; // <-- NOVA IMPORTAÇÃO
+import PWAService from '../shared/services/PWAService.js';
+import SnackbarService from '../shared/services/SnackbarService.js'; // <-- NOVA IMPORTAÇÃO
 
 /**
  * Função principal que inicializa a aplicação.
@@ -18,7 +19,8 @@ async function main() {
         ThemeService.init();
         Modals.init();
         Toast.init();
-        PWAService.init(); // <-- NOVA INICIALIZAÇÃO
+        PWAService.init();
+        SnackbarService.init(); // <-- NOVA INICIALIZAÇÃO
         
         // 2. Inicializa o Router (que vai gerir a renderização das Views)
         Router.init();
@@ -27,7 +29,6 @@ async function main() {
 
     } catch (error) {
         console.error('Falha crítica na inicialização da aplicação:', error);
-        // Renderiza uma mensagem de erro na tela para o utilizador
         const appRoot = document.getElementById('app-root');
         if (appRoot) {
             appRoot.innerHTML = `
@@ -41,5 +42,4 @@ async function main() {
     }
 }
 
-// O PONTO DE ENTRADA CORRETO: Espera que o HTML esteja pronto antes de chamar main()
 document.addEventListener('DOMContentLoaded', main);

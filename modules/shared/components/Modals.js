@@ -1,4 +1,4 @@
-// /modules/shared/components/Modals.js (CORREÇÃO ARQUITETÓNICA: Callback no closeModal)
+// /modules/shared/components/Modals.js (CORREÇÃO ARQUITETÓNICA: Adiciona ProductSelectionSheet)
 'use strict';
 
 import store from '../services/Store.js';
@@ -34,7 +34,7 @@ import * as ModalSeletorQuantidade from '../../features/atendimento/components/M
 import * as ModalAcoesPedido from '../../features/atendimento/components/ModalAcoesPedido.js';
 import * as ModalAcoesFlutuantes from '../../features/atendimento/components/ModalAcoesFlutuantes.js';
 import * as ModalTrocarCliente from '../../features/atendimento/components/ModalTrocarCliente.js';
-
+import * as ProductSelectionSheet from './ProductSelectionSheet.js'; // <-- NOVA IMPORTAÇÃO
 
 const modalComponents = {
     BackupRestoreModal, ConfirmacaoModal, CustomerPerformanceModal, DicaDoDiaModal, FechoGlobalModal,
@@ -44,16 +44,35 @@ const modalComponents = {
     FormMoverStockModal, FormNovaContaModal, FormNovaDespesaModal, FormPagamentoModal, ModalAcoesFlutuantes,
     ModalAcoesPedido, ModalFiltroSubcategoria, ModalSeletorQuantidade, ModalTrocarCliente, ProductPerformanceModal,
     FormRegistarCompraModal, ShortcutManagementModal,
+    ProductSelectionSheet, // <-- NOVO COMPONENTE
 };
 
 let modalsContainer = null;
 let appRoot = null;
 let activeModal = { close: () => {} };
+let activeSheet = { close: () => {} }; // <-- NOVO: Gerencia sheets que não fecham o modal pai
 
+// Função auxiliar para fechar o sheet atual
+function closeSheet() {
+    if (typeof activeSheet.close === 'function') {
+        activeSheet.close();
+    }
+    activeSheet = { close: () => {} };
+}
+
+/**
+ * Abre um modal padrão que desfoca o fundo.
+ * Fecha qualquer modal ou sheet ativo antes de abrir o novo.
+ * @param {string} modalName - Nome do componente modal a abrir.
+ * @param {Array} [renderArgs=[]] - Argumentos para a função `render`.
+ * @param {Array} [mountArgs=[]] - Argumentos para a função `mount` (excluindo `closeModal`).
+ */
 async function openModal(modalName, renderArgs = [], mountArgs = []) {
+    // Fecha modal ou sheet ativo
     if (typeof activeModal.close === 'function') {
         activeModal.close();
     }
+    closeSheet(); // Garante que sheets também sejam fechados
 
     const component = modalComponents[modalName];
     if (!component) {
@@ -75,7 +94,7 @@ async function openModal(modalName, renderArgs = [], mountArgs = []) {
         }
         if (modalsContainer) modalsContainer.innerHTML = '';
         if (appRoot) appRoot.classList.remove('app-desfocada');
-        
+
         activeModal = { close: () => {} };
 
         if (typeof postCloseCallback === 'function') {
@@ -86,10 +105,12 @@ async function openModal(modalName, renderArgs = [], mountArgs = []) {
     activeModal.close = closeModal;
 
     try {
-        if (component.mount.constructor.name === 'AsyncFunction') {
-            await component.mount(closeModal, ...mountArgs);
-        } else {
-            component.mount(closeModal, ...mountArgs);
+        if (component.mount && typeof component.mount === 'function') {
+            if (component.mount.constructor.name === 'AsyncFunction') {
+                await component.mount(closeModal, ...mountArgs);
+            } else {
+                component.mount(closeModal, ...mountArgs);
+            }
         }
     } catch (error) {
         console.error(`Erro ao montar o modal "${modalName}":`, error);
@@ -101,6 +122,39 @@ function init() {
     modalsContainer = document.getElementById('modals-container');
     appRoot = document.getElementById('app-root');
 }
+
+// --- Nova Função para Abrir o Bottom Sheet Persistente ---
+
+/**
+ * Abre um Bottom Sheet persistente que não fecha o modal pai (Wizard).
+ * Fecha qualquer sheet ativo antes de abrir o novo.
+ * @param {Array} products - Lista de produtos para seleção (formato {id, nome, isSelected}).
+ * @param {string} title - Título da folha.
+ * @param {Function} onUpdate - Callback (produto, isAdding) para atualizar o estado do pai.
+ */
+export function abrirProductSelectionSheet(products, title, onUpdate) {
+    if (typeof activeSheet.close === 'function') {
+        activeSheet.close(); // Fecha o sheet anterior
+    }
+
+    if (!modalsContainer) return console.error("Containers não inicializados.");
+
+    // Renderiza o HTML do sheet (z-index maior)
+    modalsContainer.insertAdjacentHTML('beforeend', ProductSelectionSheet.render(products, title, onUpdate));
+
+    const closeSheetCallback = () => {
+        ProductSelectionSheet.unmount();
+        activeSheet = { close: () => {} };
+    };
+
+    activeSheet.close = closeSheetCallback;
+
+    // Monta e anexa listeners ao sheet
+    ProductSelectionSheet.mount(modalsContainer, closeSheetCallback);
+}
+
+
+// --- Exportações das Funções de Abertura ---
 
 export function abrirModalAcoesFlutuantes(titulo, botoes) { openModal('ModalAcoesFlutuantes', [titulo, botoes], [titulo, botoes]); }
 export function abrirModalAcoesPedido(pedido, onEdit, onRemove) { openModal('ModalAcoesPedido', [pedido], [onEdit, onRemove]); }
@@ -133,4 +187,4 @@ export function abrirModalRegistarCompra(fornecedor, produtoPreSelecionado = nul
 export function abrirModalSeletorQuantidade(produtoNome, quantidadeAtual, onConfirm) { openModal('ModalSeletorQuantidade', [produtoNome, quantidadeAtual], [onConfirm]); }
 export function abrirModalShortcutManagement(produto) { openModal('ShortcutManagementModal', [produto], [produto]); }
 export function abrirModalTrocarCliente(conta, onConfirm) { openModal('ModalTrocarCliente', [conta], [conta, onConfirm]); }
-export { init };
+export { init, closeSheet }; // Exporta init e a nova função closeSheet

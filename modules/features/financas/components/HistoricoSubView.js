@@ -1,8 +1,8 @@
-// /modules/features/financas/components/HistoricoSubView.js (NOVO)
+// /modules/features/financas/components/HistoricoSubView.js (FOOTER REMOVIDO)
 'use strict';
 
 import store from '../../../shared/services/Store.js';
-import { abrirModalFechoGlobal, abrirModalExportarCompras } from '../../../shared/components/Modals.js';
+import { abrirModalFechoGlobal } from '../../../shared/components/Modals.js'; // ExportarCompras não é mais necessário aqui
 import { getPerformanceTrendForPeriod } from '../services/FinancialReportingService.js';
 import { formatarMoeda } from '../../../shared/lib/utils.js';
 
@@ -70,8 +70,8 @@ function renderCalendarGrid() {
     const state = store.getState();
     const ano = localState.dataCalendario.getFullYear();
     const mes = localState.dataCalendario.getMonth();
-    const calendarioTitulo = containerNode.querySelector('#calendario-titulo');
-    const calendarioGrid = containerNode.querySelector('#calendario-grid-dias');
+    const calendarioTitulo = containerNode?.querySelector('#calendario-titulo');
+    const calendarioGrid = containerNode?.querySelector('#calendario-grid-dias');
     if (!calendarioTitulo || !calendarioGrid) return;
 
     calendarioTitulo.textContent = new Date(ano, mes).toLocaleDateString('pt-PT', { month: 'long', year: 'numeric' });
@@ -102,6 +102,7 @@ function renderCalendarGrid() {
 }
 
 function render() {
+     // *** FOOTER REMOVIDO DAQUI ***
     return `
         <nav class="filter-bar" style="padding: 16px;">
             <button class="filter-chip ${localState.activePeriod === '7d' ? 'active' : ''}" data-period="7d">Últimos 7 dias</button>
@@ -131,11 +132,7 @@ function render() {
                 </div>
             </details>
         </div>
-        <div class="bottom-action-bar">
-            <button id="btn-exportar-relatorio" class="button button-secondary full-width">
-                <i class="lni lni-download"></i> Exportar Relatório de Compras
-            </button>
-        </div>
+        
     `;
 }
 
@@ -143,19 +140,19 @@ function handleContainerClick(e) {
     const periodBtn = e.target.closest('[data-period]');
     if (periodBtn) {
         localState.activePeriod = periodBtn.dataset.period;
-        containerNode.querySelector('.filter-bar').innerHTML = `
-            <button class="filter-chip ${localState.activePeriod === '7d' ? 'active' : ''}" data-period="7d">Últimos 7 dias</button>
-            <button class="filter-chip ${localState.activePeriod === 'esteMes' ? 'active' : ''}" data-period="esteMes">Este Mês</button>
-            <button class="filter-chip ${localState.activePeriod === 'mesPassado' ? 'active' : ''}" data-period="mesPassado">Mês Passado</button>
-        `;
-        renderPerformanceChart();
+        // Re-renderiza a barra de filtros eficientemente
+        const filterBar = containerNode.querySelector('.filter-bar');
+        if(filterBar) {
+             filterBar.querySelectorAll('.filter-chip').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.period === localState.activePeriod);
+             });
+        }
+        renderPerformanceChart(); // Re-renderiza apenas o gráfico
         return;
     }
 
-    if (e.target.closest('#btn-exportar-relatorio')) {
-        abrirModalExportarCompras();
-        return;
-    }
+    // *** LÓGICA DO BOTÃO EXPORTAR REMOVIDA DAQUI ***
+    // if (e.target.closest('#btn-exportar-relatorio')) { ... }
 
     const diaBtn = e.target.closest('.calendar-grid [data-dia]');
     if (diaBtn) {
@@ -187,7 +184,7 @@ export function mount(container) {
     
     unsubscribe = store.subscribe(() => {
         if(containerNode) {
-            renderCalendarGrid();
+            renderCalendarGrid(); // Apenas o calendário precisa reagir a novos fechos
         }
     });
 }
