@@ -1,29 +1,39 @@
-/* /styles/views/fluxo-caixa.css (REESCRITO PARA O NOVO PAINEL DE CONTROLO) */
+/* /styles/views/fluxo-caixa.css (ATUALIZADO PARA HEADER PADRONIZADO E TOKENS) */
+
+/* Garante que o conteúdo principal comece abaixo do header fixo */
+/* Header height = 68px */
+#fluxo-caixa-content {
+    padding-top: 68px; /* Adiciona padding para compensar o header sticky */
+}
+
 
 /* ======================================================================== */
 /* === Destaque do KPI Principal (Saldo do Dia / Total Gasto) === */
 /* ======================================================================== */
 
 .kpi-highlight {
-    padding: 24px 16px;
-    margin: 0 16px 16px 16px;
+    padding: var(--space-6) var(--space-4); /* 24px 16px */
+    margin: 0; /* Removida margem, padding vem do .page-content */
     text-align: center;
     border-radius: var(--corner-radius-lg);
     background-color: var(--bg-secondary);
+    border: 1px solid var(--border-decorative); /* Adiciona borda sutil */
 }
 
 .kpi-highlight .kpi-label {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: var(--font-size-label); /* 14px */
+    font-weight: var(--font-weight-medium); /* 600 */
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .kpi-highlight .kpi-value {
-    font-size: 40px;
-    font-weight: 800;
+    font-size: 36px; /* Ajustado para um tamanho grande, mas não excessivo */
+    font-weight: var(--font-weight-bold); /* 700 */
     line-height: 1.2;
+    display: block; /* Garante quebra de linha */
+    margin-top: var(--space-1); /* 4px */
 }
 
 .kpi-highlight .kpi-value.success {
@@ -37,16 +47,7 @@
 /* ======================================================================== */
 /* === Títulos de Secção para Gráficos e Listas === */
 /* ======================================================================== */
-
-.section-title {
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-secondary);
-    padding: 0 16px;
-    margin-bottom: 8px; /* Espaçamento antes do card do gráfico/accordion */
-}
+/* Estilos de accordion já definidos em accordion.css */
 
 
 /* ======================================================================== */
@@ -54,18 +55,18 @@
 /* ======================================================================== */
 
 .transaction-list {
-    padding: 0 16px 16px;
+    /* Padding definido pelo .accordion-content */
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--space-3); /* 12px */
 }
 
 .transaction-item {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: var(--space-4); /* 16px */
     background-color: var(--bg-tertiary);
-    padding: 12px;
+    padding: var(--space-3); /* 12px */
     border-radius: var(--corner-radius-md);
 }
 
@@ -79,13 +80,29 @@
 .transaction-icon .lni-arrow-down-circle { color: var(--feedback-error); }
 
 .transaction-details { flex-grow: 1; min-width: 0; }
-.transaction-description { 
-    font-weight: 500;
+.transaction-description {
+    font-weight: var(--font-weight-medium); /* 600 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: var(--font-size-body); /* 16px */
 }
-.transaction-date { font-size: 12px; color: var(--text-secondary); }
-.transaction-amount { font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.transaction-date {
+    font-size: var(--font-size-caption); /* 12px */
+    color: var(--text-secondary);
+}
+.transaction-amount {
+    font-weight: var(--font-weight-bold); /* 700 */
+    font-size: var(--font-size-label); /* 14px */
+    flex-shrink: 0;
+}
 .transaction-credit { color: var(--feedback-success); }
 .transaction-debit { color: var(--feedback-error); }
+
+/* Estilos para a sub-view Histórico e Despesas */
+/* Gráficos e Calendário já estilizados em seus componentes/vistas */
+
+/* Garante que o rodapé (FAB ou Bottom Bar) tenha espaço */
+#fluxo-caixa-content {
+     padding-bottom: 96px; /* Adiciona espaço extra na base */
+}

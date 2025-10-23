@@ -1,86 +1,90 @@
-/* /styles/components/toast.css (REFATORADO PARA CRIAÇÃO DINÂMICA) */
+/* /styles/components/toast.css (REFINADO VISUALMENTE) */
 
-/* Container que vai segurar todos os toasts */
 #toast-container {
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 200; /* Prioridade máxima na UI */
+    z-index: 200;
     display: flex;
-    flex-direction: column; /* Empilha os toasts verticalmente */
-    align-items: center; /* Centraliza os toasts no container */
-    gap: 8px; /* Espaço entre toasts empilhados */
-    pointer-events: none; /* Permite cliques através do container */
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2); /* 8px */
+    pointer-events: none;
+    width: max-content; /* Garante que o container não estique desnecessariamente */
+    max-width: calc(100vw - var(--space-8)); /* 32px de margem lateral */
 }
 
 .toast-notification {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    border-radius: var(--corner-radius-full); /* Mais arredondado para um look moderno */
-    font-weight: 600;
+    gap: var(--space-3); /* 12px */
+    padding: var(--space-3) var(--space-5); /* 12px 20px */
+    border-radius: var(--corner-radius-md); /* *** CORREÇÃO: Raio reduzido *** */
+    font-weight: var(--font-weight-medium); /* 600 */
     box-shadow: var(--shadow-high);
-    width: fit-content; /* Largura baseada no conteúdo */
-    max-width: calc(100vw - 32px); /* Largura máxima, menos o padding da tela */
-    pointer-events: auto; /* Permite interação com o toast se necessário */
+    width: fit-content;
+    max-width: 100%; /* Ocupa no máximo a largura do container */
+    pointer-events: auto;
+    border: 1px solid rgba(var(--shadow-color), 0.1); /* Borda sutil para destaque */
 
-    /* Estado inicial para animação de entrada */
+    /* *** CORREÇÃO: Estilo Padrão (Fallback com Contraste) *** */
+    background-color: var(--palette-neutral-10); /* Fundo escuro */
+    color: var(--palette-neutral-98); /* Texto claro */
+
     opacity: 0;
     transform: translateY(-20px) scale(0.95);
     transition: var(--transition-medium);
 }
 
-/* Classe de estado para mostrar o toast */
 .toast-notification.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
 }
 
-/* Ícone dentro do toast */
 .toast-icon {
     font-size: 20px;
-    line-height: 1; /* Garante alinhamento vertical */
+    line-height: 1;
+    flex-shrink: 0; /* Evita que o ícone encolha */
 }
 
-/* Mensagem dentro do toast */
 .toast-message {
     line-height: 1.4;
-    word-break: break-word; /* Garante que mensagens longas quebrem a linha */
+    word-break: break-word;
 }
 
-/* Modificador para o tipo 'sucesso' */
+/* *** CORREÇÃO: Cores Semânticas Verificadas *** */
 .toast-notification.success {
     background-color: var(--feedback-success);
     color: var(--feedback-success-text);
+    border-color: rgba(0,0,0, 0.1); /* Mantém uma borda sutil */
 }
 
-/* Modificador para o tipo 'erro' */
 .toast-notification.error {
     background-color: var(--feedback-error);
     color: var(--feedback-error-text);
+     border-color: rgba(0,0,0, 0.1);
 }
 
-/* Modificador para o tipo 'info' (se usado no futuro) */
 .toast-notification.info {
-    background-color: var(--brand-primary);
+    background-color: var(--brand-primary); /* Usando cor primária para info */
     color: var(--brand-primary-text);
+     border-color: rgba(0,0,0, 0.1);
 }
 
 
 /* Indicador Offline (inalterado) */
 .offline-indicator {
     position: fixed;
-    bottom: 80px; /* Acima da nav-bar */
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 150;
-    padding: 8px 16px;
+    padding: var(--space-2) var(--space-4);
     background-color: var(--feedback-warning);
     color: var(--feedback-warning-text);
-    font-size: 14px;
-    font-weight: 600;
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-medium);
     border-radius: var(--corner-radius-md);
     box-shadow: var(--shadow-medium);
     display: none;

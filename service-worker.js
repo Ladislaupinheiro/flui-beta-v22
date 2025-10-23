@@ -1,7 +1,7 @@
-// /service-worker.js (COMPLETO E ATUALIZADO - v5)
+// /service-worker.js (COMPLETO E ATUALIZADO - v6)
 'use strict';
 
-const CACHE_NAME = 'flui-v5'; // Versão incrementada
+const CACHE_NAME = 'flui-v6'; // Versão incrementada
 
 const URLS_TO_CACHE = [
     // --- Core & Assets ---
@@ -33,6 +33,7 @@ const URLS_TO_CACHE = [
     './styles/components/toast.css',
     './styles/components/toggle-switch.css',
     './styles/components/wizard.css',
+    './styles/components/snackbar.css', // <-- NOVO: Snackbar CSS
     './styles/views/analises.css',
     './styles/views/cliente-detalhes.css',
     './styles/views/client-list.css',
@@ -53,13 +54,17 @@ const URLS_TO_CACHE = [
     './modules/shared/components/Modals.js',
     './modules/shared/components/Nav.js',
     './modules/shared/components/Toast.js',
+    './modules/shared/components/SnackbarComponent.js', // <-- NOVO
     './modules/shared/lib/utils.js',
     './modules/shared/services/Storage.js',
     './modules/shared/services/Store.js',
     './modules/shared/services/ThemeService.js',
     './modules/shared/services/TipsService.js',
     './modules/shared/services/CatalogoService.js',
+    './modules/shared/services/PWAService.js', // <-- NOVO
+    './modules/shared/services/SnackbarService.js', // <-- NOVO
     './modules/shared/ui/ConfirmacaoModal.js',
+    './modules/shared/ui/PackagingSlider.js', // <-- NOVO
 
     // --- Shared Store Slices ---
     './modules/shared/store/combineReducers.js',
@@ -74,7 +79,7 @@ const URLS_TO_CACHE = [
     './modules/shared/store/historicoComprasSlice.js',
     './modules/shared/store/categoriasDeProdutoSlice.js',
 
-    // --- Features: Modals ---
+    // --- Features: Modals & Steps (NOVOS FLUXOS) ---
     './modules/features/atendimento/components/FormAddPedidoModal.js',
     './modules/features/atendimento/components/FormNovaContaModal.js',
     './modules/features/atendimento/components/FormPagamentoModal.js',
@@ -100,7 +105,10 @@ const URLS_TO_CACHE = [
     './modules/features/inventario/components/FormEditProdutoModal.js',
     './modules/features/inventario/components/FormGerirCategoriasModal.js',
     './modules/features/inventario/components/FormMoverStockModal.js',
-    './modules/features/inventario/components/FormRegistarCompraModal.js',
+    './modules/features/inventario/components/FormRegistarCompraModal.js', // Orquestrador atualizado
+    './modules/features/inventario/components/Step1_ProductSelection.js', // <-- NOVO PASSO 1
+    './modules/features/inventario/components/Step2_ItemDetails.js',     // <-- NOVO PASSO 2
+    './modules/features/inventario/components/Step3_PurchaseFinalization.js', // <-- NOVO PASSO 3
     './modules/features/inventario/components/ProductPerformanceModal.js',
     './modules/features/inventario/components/ShortcutManagementModal.js',
     './modules/features/inventario/components/ModalFiltroSubcategoria.js',
@@ -111,22 +119,18 @@ const URLS_TO_CACHE = [
     './modules/features/inventario/components/PurchaseHistory.js',
     './modules/features/settings/components/BackupRestoreModal.js',
 
-    // --- Features: Componentes Modulares (NOVOS) ---
-    './modules/features/inventario/components/Step1_AddItem.js',
-    './modules/features/inventario/components/Step2_ReviewPurchase.js',
-    './modules/features/inventario/components/Step3_SetPrices.js',
+    // --- Views Modulares (NOVAS) ---
     './modules/features/financas/components/HojeSubView.js',
     './modules/features/financas/components/HistoricoSubView.js',
     './modules/features/financas/components/DespesasSubView.js',
 
-    // --- Features: Services (MODULARIZADOS) ---
+    // --- Features: Services ---
     './modules/features/clientes/services/ClientAnalyticsService.js',
     './modules/features/financas/services/CashFlowService.js',
     './modules/features/financas/services/FinancialReportingService.js',
     './modules/features/financas/services/ReportingService.js',
     './modules/features/inventario/services/ProductAnalyticsService.js',
     './modules/features/inventario/services/SupplierAnalyticsService.js',
-    // FinancialAnalyticsService.js foi removido
 
     // --- Features: Views ---
     './modules/features/analises/AnálisesView.js',

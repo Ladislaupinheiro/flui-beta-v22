@@ -1,178 +1,143 @@
-/* /styles/views/page-layouts.css (ATUALIZADO COM HEADER DE INVENTÁRIO) */
-
-/* ======================================================================== */
-/* === Estrutura Principal da Página/Vista === */
-/* ======================================================================== */
+/* /styles/views/page-layouts.css (AJUSTADO PARA HEADER FLEXÍVEL) */
 
 .page-header {
-    padding: 16px;
+    padding: var(--space-4); /* 16px */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    height: 68px; /* Altura fixa para consistência */
+    gap: var(--space-4); /* 16px */
+    /* Removida altura fixa */
 }
 
-/* Modificador para cabeçalhos que ficam fixos no topo ao rolar */
 .page-header.sticky-header {
     position: sticky;
     top: 0;
-    background-color: var(--bg-secondary); /* Usa cor secundária para se destacar ligeiramente */
+    background-color: var(--bg-secondary);
     z-index: 10;
     border-bottom: 1px solid var(--border-decorative);
-    padding: 8px 16px; /* Padding vertical reduzido para header simples */
+    padding: var(--space-2) var(--space-4); /* 8px 16px */
+    /* Altura será determinada pelo conteúdo (título ou tabs) */
 }
 
-/* NOVO: Estilo específico para o header do Inventário (clean, sem título) */
-.page-header.inventory-header {
-    height: auto; /* Altura determinada pelo conteúdo (o segmented control) */
-    padding-top: 16px; /* Mais espaço acima do segmented control */
-    padding-bottom: 16px; /* Espaço abaixo */
-    border-bottom: none; /* A borda será adicionada pela barra de filtros fixa abaixo */
-    /* Garante que o header ocupe toda a largura, mesmo com padding */
-    margin-left: -16px;
-    margin-right: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
+/* Header específico do Inventário/Caixa (com tabs) */
+.page-header.inventory-header,
+.page-header.caixa-header { /* Adicionada classe .caixa-header */
+    height: 68px; /* Altura fixa para consistência com tabs */
+    padding-top: var(--space-2); /* 8px */
+    padding-bottom: var(--space-2); /* 8px */
+    align-items: center; /* Centraliza verticalmente o container das tabs */
+    /* Remove padding lateral do header para o container das tabs ir até as bordas */
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .main-segmented-control-container {
     width: 100%;
     display: flex;
-    justify-content: center; /* Centraliza o segmented control */
+    justify-content: center;
+    padding: 0 var(--space-4); /* Adiciona padding lateral aqui */
 }
 
 .segmented-control.main-tabs {
-    /* Ajusta a largura máxima para evitar que fique muito largo em ecrãs maiores */
-    max-width: 300px;
+    max-width: 300px; /* Mantém largura máxima */
     width: 100%;
-    background-color: var(--bg-tertiary); /* Fundo para o grupo */
+    background-color: var(--bg-tertiary);
     border-radius: var(--corner-radius-full);
-    padding: 4px; /* Padding interno */
-    display: flex; /* Garante alinhamento interno dos botões */
-    box-shadow: var(--shadow-low); /* Sombra subtil para destacar */
+    padding: var(--space-1); /* 4px */
+    display: flex;
+    box-shadow: var(--shadow-low);
+    height: 40px; /* Altura fixa para os botões */
 }
 .main-tabs .segmented-control-button {
-    flex: 1; /* Garante que os botões ocupem espaço igual */
-    /* A aparência (padding, fonte, cores) vem do componente base .segmented-control-button */
-}
-/* FIM NOVO */
-
-/* Modificador para cabeçalhos que contêm filtros (mantido para outros usos, se houver) */
-.page-header.with-filters {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    padding-bottom: 8px;
-    height: auto;
+    flex: 1;
+    /* Estilos base vêm de segmented-control.css / chip.css */
+    padding: var(--space-2) var(--space-3); /* 8px 12px */
+    font-size: var(--font-size-label); /* 14px */
+    border-radius: var(--corner-radius-full);
 }
 
-/* Container flexível dentro do header para alinhar título e ações */
 .header-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    width: 100%; /* Garante que ocupe toda a largura */
+    gap: var(--space-4); /* 16px */
+    width: 100%;
 }
 
-/* Título da página */
 .page-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: var(--font-size-display); /* 24px */
+    font-weight: var(--font-weight-bold); /* 700 */
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Evita que títulos longos quebrem o layout */
-    text-align: center; /* Centraliza o título por padrão */
-    flex-grow: 1; /* Permite que o título ocupe espaço e se centralize */
-    /* Remove text-align se houver botões em ambos os lados */
-}
-.page-header.sticky-header .header-row .page-title:not(:only-child) {
-    /* text-align: left; */ /* Comentado - Manter centralizado mesmo com botões */
+    text-overflow: ellipsis;
+    text-align: center;
+    flex-grow: 1;
 }
 
-
-/* Botão de Voltar padrão */
 .header-action-btn.back-btn {
     font-size: 24px;
     color: var(--text-primary);
 }
 
 
-/* Container principal do conteúdo da página */
 .page-content {
-    padding: 16px;
-    /* Espaçamento inferior para não ser obstruído pela nav-bar ou bottom-action-bar */
-    padding-bottom: 80px;
+    padding: var(--space-4); /* 16px */
+    padding-bottom: 80px; /* Espaço para nav-bar */
     display: flex;
     flex-direction: column;
-    gap: 16px; /* Espaçamento padrão entre os elementos do conteúdo */
+    gap: var(--space-4); /* 16px */
 }
 
-/* Variação sem padding lateral/superior inicial (útil para listas/grids que vão até as bordas) */
 .page-content-no-padding {
-    /* Padding-top será definido por with-sticky-filters, se aplicável */
     padding-bottom: 80px;
+    /* Padding-top será ajustado por .with-sticky-filters */
 }
 
-/* Variação com mais espaço inferior para rodapés fixos maiores */
 .page-content.with-sticky-footer {
-    padding-bottom: 180px;
+    padding-bottom: 180px; /* Ajustar se a altura do footer mudar */
 }
-
-/* ======================================================================== */
-/* === Estruturas de Conteúdo Comuns === */
-/* ======================================================================== */
 
 .list-container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 0 16px 16px 16px; /* Adiciona padding quando usado fora de .page-content */
+    gap: var(--space-3); /* 12px */
+    /* Padding aplicado diretamente nos componentes filhos ou com style inline */
 }
 
-/* Estado Vazio */
 .empty-state-container {
-    padding: 48px 16px;
+    padding: var(--space-8) var(--space-4); /* 32px 16px -> Aumentado padding vertical */
     text-align: center;
     color: var(--text-secondary);
 }
-
 .empty-state-container.small {
-    padding: 16px;
+    padding: var(--space-4); /* 16px */
 }
 
-/* Mensagem para listas vazias */
 .empty-list-message {
     text-align: center;
     color: var(--text-secondary);
-    font-size: 14px;
-    padding: 16px;
+    font-size: var(--font-size-label); /* 14px */
+    padding: var(--space-4); /* 16px */
 }
-
 .empty-list-message.small {
-    padding: 8px;
+    padding: var(--space-2); /* 8px */
 }
 
-/* ======================================================================== */
-/* === Barra de Ação Inferior === */
-/* ======================================================================== */
 
 .bottom-action-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 16px;
-    background-color: var(--bg-secondary); /* Cor secundária para contraste */
+    padding: var(--space-4); /* 16px */
+    background-color: var(--bg-secondary);
     border-top: 1px solid var(--border-decorative);
-    z-index: 20; /* Acima do conteúdo, abaixo de modais */
-    box-shadow: 0 -2px 10px rgba(var(--shadow-color), 0.1); /* Sombra superior */
+    z-index: 20;
+    box-shadow: 0 -2px 10px rgba(var(--shadow-color), 0.1);
 }
 
-/* Modificador para rodapés com dois botões lado a lado */
 .bottom-action-bar.split-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: var(--space-3); /* 12px */
 }

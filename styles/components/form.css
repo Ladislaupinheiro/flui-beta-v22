@@ -1,4 +1,4 @@
-/* /styles/components/form.css (ATUALIZADO) */
+/* /styles/components/form.css (ATUALIZADO COM TOKENS DS 2.0) */
 
 /* ======================================================================== */
 /* === Estrutura Base de Formulários === */
@@ -7,23 +7,23 @@
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--space-2); /* 8px -> --space-2 */
 }
 
 .form-label {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: var(--font-size-label); /* 14px -> --font-size-label */
+    font-weight: var(--font-weight-medium); /* 500 -> --font-weight-medium */
     color: var(--text-secondary);
 }
 
 .input-field {
     width: 100%;
-    padding: 12px 14px;
+    padding: var(--space-3) var(--space-4); /* 12px 14px -> --space-3 --space-4 (aproximado) */
     border: 1px solid var(--border-interactive);
     border-radius: var(--corner-radius-md);
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-size: 16px;
+    font-size: var(--font-size-body); /* 16px -> --font-size-body */
     transition: var(--transition-fast);
 }
 
@@ -41,14 +41,14 @@
 
 .read-only-field {
     width: 100%;
-    padding: 12px;
+    padding: var(--space-3); /* 12px -> --space-3 */
     border: 1px solid var(--border-decorative);
     border-radius: var(--corner-radius-md);
     background-color: var(--bg-tertiary);
     color: var(--text-secondary);
-    font-size: 16px;
+    font-size: var(--font-size-body); /* 16px -> --font-size-body */
     text-align: center;
-    font-weight: 600;
+    font-weight: var(--font-weight-medium); /* 600 -> --font-weight-medium */
 }
 
 .read-only-field.success {
@@ -57,26 +57,25 @@
 }
 
 .form-help-text {
-    font-size: 14px;
+    font-size: var(--font-size-label); /* 14px -> --font-size-label */
     color: var(--text-secondary);
 }
 
 .form-divider {
     text-align: center;
     color: var(--text-secondary);
-    font-size: 14px;
-    margin: 16px 0;
+    font-size: var(--font-size-label); /* 14px -> --font-size-label */
+    margin: var(--space-4) 0; /* 16px -> --space-4 */
 }
 
-/* Para compatibilidade de aparência entre input e select */
 select.input-field {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%235a6d7a' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 14px center;
-    background-size: 16px;
+    background-position: right var(--space-4) center; /* 14px -> --space-4 */
+    background-size: 16px; /* Mantido fixo por enquanto */
 }
 
 
@@ -87,42 +86,40 @@ select.input-field {
 .form-grid-2-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: var(--space-4); /* 16px -> --space-4 */
 }
 
 /* ======================================================================== */
 /* === Componentes Específicos de Formulário === */
 /* ======================================================================== */
 
-/* *** NOVO: Campo de Busca *** */
 .search-and-filter-bar {
-    padding: 0 16px 16px;
+    padding: 0 var(--space-4) var(--space-4); /* 16px -> --space-4 */
     position: sticky;
-    top: 68px; /* Altura do page-header */
+    top: 68px;
     background: var(--bg-primary);
     z-index: 9;
 }
 .search-input {
     width: 100%;
-    padding: 12px 14px 12px 40px; /* Espaço para o ícone */
+    padding: var(--space-3) var(--space-4) var(--space-3) 40px;
     border: 1px solid var(--border-interactive);
-    border-radius: var(--corner-radius-full);
+    /* *** CORREÇÃO APLICADA AQUI *** */
+    border-radius: var(--corner-radius-full); /* Garante o estilo "pill" */
     background-color: var(--bg-secondary);
     color: var(--text-primary);
-    font-size: 16px;
+    font-size: var(--font-size-body);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238a9ba8' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: 14px center;
+    background-position: var(--space-4) center;
     background-size: 16px;
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4); /* Mantém margem inferior padrão */
 }
 .search-input:focus {
     outline: none;
     border-color: var(--brand-primary);
     box-shadow: 0 0 0 2px var(--brand-accent);
 }
-
-/* --- Campo de Busca com Autocomplete --- */
 .form-group.with-autocomplete {
     position: relative;
 }
@@ -138,12 +135,12 @@ select.input-field {
     border-radius: 0 0 var(--corner-radius-md) var(--corner-radius-md);
     box-shadow: var(--shadow-medium);
     z-index: 10;
-    max-height: 160px;
+    max-height: 160px; /* Mantido fixo por enquanto */
     overflow-y: auto;
 }
 
 .search-result-item {
-    padding: 12px 14px;
+    padding: var(--space-3) var(--space-4); /* 12px 14px -> --space-3 --space-4 */
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -153,33 +150,33 @@ select.input-field {
     background-color: var(--bg-tertiary);
 }
 .search-result-name {
-    font-weight: 500;
+    font-weight: var(--font-weight-medium); /* 500 -> --font-weight-medium */
 }
 .search-result-stock {
-    font-size: 12px;
+    font-size: var(--font-size-caption); /* 12px -> --font-size-caption */
     color: var(--text-secondary);
 }
 
-/* --- Seletor de Método de Pagamento --- */
 .payment-total-amount {
+    /* Manter tamanhos maiores explícitos por enquanto */
     font-size: 48px;
     font-weight: 800;
     color: var(--brand-primary);
     display: block;
-    margin: 16px 0;
+    margin: var(--space-4) 0; /* 16px -> --space-4 */
 }
 .payment-method-selector {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: var(--space-3); /* 12px -> --space-3 */
 }
 .payment-method-button {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 16px;
+    gap: var(--space-2); /* 8px -> --space-2 */
+    padding: var(--space-4); /* 16px -> --space-4 */
     border: 2px solid var(--border-decorative);
     border-radius: var(--corner-radius-md);
     background: none;
@@ -188,11 +185,11 @@ select.input-field {
     transition: var(--transition-fast);
 }
 .payment-method-button i {
-    font-size: 32px;
+    font-size: 32px; /* Mantido explícito */
     color: var(--text-secondary);
 }
 .payment-method-button span {
-    font-weight: 600;
+    font-weight: var(--font-weight-medium); /* 600 -> --font-weight-medium */
 }
 .payment-method-button.active {
     border-color: var(--brand-primary);
@@ -202,22 +199,19 @@ select.input-field {
     color: var(--brand-primary);
 }
 
-/* --- Grelha de Quantidade --- */
 .quantity-grid {
     display: grid;
-    /* *** CORREÇÃO APLICADA AQUI: Garante que os botões se adaptam ao espaço *** */
     grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-    gap: 12px;
-    padding: 16px; /* Adiciona padding ao container para espaçamento */
+    gap: var(--space-3); /* 12px -> --space-3 */
+    padding: var(--space-4); /* 16px -> --space-4 */
 }
 .quantity-grid-button {
-    /* *** CORREÇÃO APLICADA AQUI *** */
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     background-color: var(--bg-tertiary);
     border: none;
-    font-weight: 600;
-    font-size: 18px;
+    font-weight: var(--font-weight-medium); /* 600 -> --font-weight-medium */
+    font-size: 18px; /* Mantido explícito */
     cursor: pointer;
     transition: var(--transition-fast);
     color: var(--text-primary);

@@ -1,42 +1,33 @@
-/* /styles/views/inventario.css (ATUALIZADO PARA NOVO LAYOUT E FILTROS) */
+/* /styles/views/inventario.css (ATUALIZADO COM ESPAÇAMENTO CORRETO) */
 
-/* ======================================================================== */
-/* === Header Específico do Inventário (com Tabs Principais) === */
-/* ======================================================================== */
-/* Estilos principais agora em page-layouts.css */
-/* Ajuste fino da altura do header para cálculo do sticky top */
 .page-header.inventory-header {
-    height: 68px; /* Altura ajustada para o segmented control + padding */
-    /* Outros estilos em page-layouts.css */
+    height: 68px;
 }
 
 
-/* ======================================================================== */
-/* === Barra de Filtros Fixa (Aba Produtos) === */
-/* ======================================================================== */
-
 .sticky-filters {
     position: sticky;
-    /* Colado abaixo do header principal (68px) */
     top: 68px;
-    background-color: var(--bg-primary); /* Fundo para cobrir conteúdo ao rolar */
-    z-index: 9; /* Abaixo do header principal (10), mas acima do conteúdo */
-    padding-top: 8px; /* Espaço acima da barra de pesquisa */
+    background-color: var(--bg-primary);
+    z-index: 9;
+    padding-top: var(--space-2); /* 8px -> Ajustado para --space-2 */
     border-bottom: 1px solid var(--border-decorative);
-    /* Garante que ocupe toda a largura */
-    margin-left: -16px; /* Compensa padding do .page-content */
-    margin-right: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    height: 116px; /* Altura fixa: padding-top(8) + search-bar(48+8) + primary-filter(40+8) = 112px -> arredondado para 116px */
+    margin-left: calc(-1 * var(--space-4));
+    margin-right: calc(-1 * var(--space-4));
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+    /* Altura agora calculada com base no conteúdo + padding */
+    /* height: 116px; REMOVIDO altura fixa */
 }
 
 .search-actions-bar {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding-bottom: 8px; /* Espaço entre pesquisa e filtros primários */
-    height: 56px; /* 48px input + 8px padding */
+    gap: var(--space-2); /* 8px */
+    /* *** CORREÇÃO APLICADA AQUI: Adiciona margem inferior *** */
+    margin-bottom: var(--space-2); /* 8px */
+    /* padding-bottom: 8px; REMOVIDO padding, substituído por margin */
+    /* height: 56px; REMOVIDO altura fixa */
 }
 
 .search-input-container {
@@ -44,15 +35,19 @@
     flex-grow: 1;
 }
 
-.search-input { /* Reutiliza estilo de form.css, mas com ajustes */
+.search-input {
     width: 100%;
-    padding: 12px 14px 12px 40px;
+    padding: var(--space-3) var(--space-4) var(--space-3) 40px;
     background-color: var(--bg-secondary);
-    border-radius: var(--corner-radius-md);
+    border-radius: var(--corner-radius-full); /* Mantém raio completo */
     margin-bottom: 0;
     height: 48px;
-    font-size: 16px;
+    font-size: var(--font-size-body);
     border: 1px solid var(--border-interactive);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238a9ba8' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: var(--space-4) center;
+    background-size: 16px;
 }
 .search-input:focus {
      outline: none;
@@ -62,7 +57,7 @@
 
 .search-icon {
     position: absolute;
-    left: 12px;
+    left: var(--space-3); /* 12px */
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-placeholder);
@@ -71,94 +66,80 @@
 }
 
 .primary-filter-bar {
-    padding-bottom: 8px; /* Espaço abaixo dos filtros primários */
+    padding-bottom: var(--space-2); /* 8px */
     display: flex;
-    height: 48px; /* Altura dos filtros primários + padding */
+    /* height: 48px; REMOVIDO altura fixa */
 }
 
 .segmented-control.category-tabs {
     flex-grow: 1;
     background-color: var(--bg-tertiary);
     border-radius: var(--corner-radius-full);
-    padding: 4px;
+    padding: var(--space-1); /* 4px */
     display: flex;
-    height: 40px; /* Altura interna do segmented control */
+    /* height: 40px; REMOVIDO altura fixa */
 }
 .category-tabs .segmented-control-button {
      flex: 1;
-     padding: 6px 14px;
-     font-size: 14px;
+     padding: var(--space-2) var(--space-3); /* 8px 12px -> Ajustado padding */
+     font-size: var(--font-size-label); /* 14px */
      border-radius: var(--corner-radius-full);
 }
 
-/* Ajusta o padding do conteúdo principal quando os filtros estão fixos */
-/* Altura header (68px) + Altura filtros (116px) = 184px */
+/* Ajusta o padding do conteúdo principal */
+/* Recalcular altura: Header(68) + Filtros(padding-top(8) + search(48+8) + filter(40+8)) = ~180px */
 .page-content-no-padding.with-sticky-filters {
-    padding-top: 184px;
+    padding-top: 180px; /* Ajustar se necessário */
 }
 
 
-/* ======================================================================== */
-/* === Estrutura de Paginação Vertical (Aba Produtos) === */
-/* ======================================================================== */
-
 .category-carousel-title {
-    padding: 24px 16px 8px 16px;
-    font-size: 14px;
-    font-weight: 700;
+    padding: var(--space-6) var(--space-4) var(--space-2) var(--space-4); /* 24px 16px 8px 16px */
+    font-size: var(--font-size-caption); /* 14px -> 12px (Caption) */
+    font-weight: var(--font-weight-medium); /* 700 -> 600 (Medium) */
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-/* Seleciona APENAS os swiper-container que são carrosséis de produto */
 #inventario-produtos-grid swiper-container.product-carousel {
-    width: 100%; /* Ocupa a largura total do container pai */
-    padding: 0 16px; /* Adiciona padding lateral DENTRO do grid */
+    width: 100%;
+    padding: 0 var(--space-4); /* 16px */
     overflow: hidden;
-    /* padding-bottom: 24px; */ /* Espaço para paginação agora controlado pelo Swiper */
     --swiper-pagination-color: var(--brand-primary);
     --swiper-pagination-bullet-inactive-color: var(--border-decorative);
     --swiper-pagination-bullet-inactive-opacity: 0.8;
-    --swiper-pagination-bottom: 8px; /* Posição da paginação */
-    --swiper-pagination-bullet-size: 6px; /* Tamanho menor para os bullets */
+    --swiper-pagination-bottom: var(--space-2); /* 8px */
+    --swiper-pagination-bullet-size: 6px;
 }
 
-
 #inventario-produtos-grid swiper-slide {
-    width: 100%; /* Garante que o slide ocupe a largura do container */
+    width: 100%;
 }
 
 .product-page-container {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding-bottom: 32px; /* Espaço extra abaixo dos cards para a paginação não sobrepor */
+    gap: var(--space-3); /* 12px */
+    padding-bottom: var(--space-8); /* 32px -> Aumenta espaço para paginação */
 }
 
-
-/* ======================================================================== */
-/* === Card de Produto (Ajustes finos) === */
-/* ======================================================================== */
-/* Estilos base em card.css */
-
 .product-card {
-    position: relative; /* Contexto para o botão de menu absoluto */
+    position: relative;
 }
 
 .product-card .product-card-menu-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 2; /* Acima do conteúdo */
+    top: var(--space-2); /* 8px */
+    right: var(--space-2);
+    z-index: 2;
 }
 
 .product-card .stock-action-button i {
     font-size: 16px;
 }
 
-/* Texto de aviso para preço indefinido */
 .product-card-price.warning-text {
     color: var(--feedback-warning);
-    font-weight: 600;
+    font-weight: var(--font-weight-medium); /* 600 */
 }

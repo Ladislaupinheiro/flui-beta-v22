@@ -1,91 +1,65 @@
-/* /styles/components/_accordion.css - Estilos para o componente Accordion */
+/* /styles/components/_accordion.css - Estilos para o componente Accordion (Hover Removido) */
 
 .accordion-item {
-    /* O espaçamento entre itens é controlado pelo container pai (.list-container) */
-    border-bottom: 1px solid var(--border-decorative); /* Separação visual entre accordions */
+    border-bottom: 1px solid var(--border-decorative);
 }
 .accordion-item:last-child {
-    border-bottom: none; /* Remove a borda do último item */
+    border-bottom: none;
 }
 
 
 .accordion-header {
-    /* Transforma o <summary> num cabeçalho flexível */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 8px 16px 0; /* Ajusta padding (sem padding esquerdo) */
+    padding: var(--space-4) var(--space-2) var(--space-4) 0; /* 16px 8px 16px 0 */
     cursor: pointer;
-    position: relative; /* Para a linha inferior de foco */
-
-    /* Remove o marcador de lista padrão (seta) do <summary> */
+    position: relative; /* Mantido caso necessário para outros pseudo-elementos */
     list-style: none;
-    outline: none; /* Remove outline padrão do focus */
+    outline: none;
 }
 .accordion-header::-webkit-details-marker {
     display: none;
 }
 
-/* Linha inferior para feedback visual no hover/focus */
-.accordion-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--brand-primary);
-    transform: scaleX(0);
-    transition: transform 0.2s ease-in-out;
-    transform-origin: left;
-}
-.accordion-header:hover::after,
-.accordion-header:focus::after {
-     transform: scaleX(1);
-}
+/* EFEITO ::AFTER REMOVIDO */
+/* .accordion-header::after { ... } */
+/* .accordion-header:hover::after, */
+/* .accordion-header:focus::after { ... } */
 
 
 .accordion-title {
-    font-size: 16px; /* Aumentado ligeiramente */
-    font-weight: 700;
-    /* text-transform: uppercase; */ /* Removido uppercase para melhor leitura */
+    font-size: var(--font-size-body); /* Ajustado para 16px */
+    font-weight: var(--font-weight-medium); /* Ajustado para 600 */
     letter-spacing: 0.2px;
-    color: var(--text-primary); /* Cor primária para mais destaque */
+    color: var(--text-primary);
 }
 
 .accordion-icon {
     color: var(--text-secondary);
     transition: var(--transition-fast);
-    font-size: 20px; /* Aumentado ligeiramente */
-    margin-left: 8px; /* Espaço entre título e ícone */
+    font-size: 20px;
+    margin-left: var(--space-2); /* 8px */
 }
 
-/* Animação do ícone quando o accordion está aberto */
 .accordion-item[open] > .accordion-header .accordion-icon {
     transform: rotate(180deg);
 }
-.accordion-item[open] > .accordion-header {
-    /* Pode adicionar um estilo diferente ao header quando aberto, se desejar */
-    /* Ex: border-bottom: 2px solid var(--brand-primary); */
-}
-
 
 .accordion-content {
-    /* Espaçamento interno para o conteúdo do accordion */
-    padding: 8px 0 16px 0; /* Padding vertical, sem padding lateral */
+    padding: var(--space-2) 0 var(--space-4) 0; /* 8px 0 16px 0 */
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Espaçamento menor entre os itens dentro do accordion (ex: lista de produtos) */
+    gap: var(--space-1); /* 4px */
 }
 
-/* Container para accordions (usado no modal de compra) */
 .accordions-container {
     border: 1px solid var(--border-decorative);
     border-radius: var(--corner-radius-md);
-    overflow: hidden; /* Garante que os filhos respeitem o border-radius */
-    background-color: var(--bg-secondary); /* Fundo para o grupo */
-    padding: 0 16px; /* Padding interno para separar da borda */
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+    padding: 0 var(--space-4); /* 16px */
 }
 .accordions-container .accordion-item:last-child {
-    border-bottom: none; /* Remove a borda do último accordion dentro do container */
+    border-bottom: none;
 }
